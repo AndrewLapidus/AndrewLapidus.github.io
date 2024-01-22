@@ -34,10 +34,29 @@ function removeName(){
 }
 
 function loadNames(){
+    let encodedInput = document.getElementById("importName");
+    let encodedString = encodedInput.value;
+    let encodedArray = encodedString.split(',');
+    namesArr = 0;
+    namesArr = encodedArray.map(encodedString => atob(encodedString));
+    drawWheel(namesArr)
+    
+    
+    
 
 }
 
 function exportNames(){
+    NAMES_CONTAINER.innerHTML = '';
+    let input = document.createElement('input');
+    input.type='text';
+    let encodedString = namesArr.map(str => btoa(str));
+    input.value = encodedString
+    let closeButton = document.createElement('button');
+    closeButton.textContent = 'Close';
+    closeButton.addEventListener('click', () => NAMES_CONTAINER.innerHTML='');
+    NAMES_CONTAINER.appendChild(input);
+    NAMES_CONTAINER.appendChild(closeButton);
 
 }
 
@@ -218,16 +237,10 @@ async function stopWheel() {
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
-addName('Andrew');
-addName('Anthony');
-addName('Camilla');
-addName('Daniel');
-addName('David');
-addName('Doc');
-addName('JJ');
-addName('Jon');
-addName('Kevin');
-addName('Lara');
-addName('Thibaut');
-addName('Zubin');
+addName('1');
+addName('2');
+addName('3');
+addName('4');
+addName('5');
+addName('6');
 drawWheel();
