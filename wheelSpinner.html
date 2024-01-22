@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RandomNameWheel</title>
+    <link rel="stylesheet" href="wheelStyle.css">
+    
+</head>
+<body>
+    <section>
+        <form id="nameForm">
+            <label for="nameInput">Enter Name:</label>
+            <input type="text" id="nameInput" required>
+            <button onclick="addName()" type="reset" >Add Name</button>
+            
+        </form>
+    </section>
+    <section>
+        <label for="exportNames"> Export Names</label>
+        <button onclick="exportNames()" type="reset">Export</button>
+        
+    </section>
+
+    <section>
+        <label for="importName">Import names</label>
+        <input type="text" id="importName" placeholder="Paste Code Here">
+        <button onclick="loadNames()" type="reset">Import</button>
+    </section>
+    <div id="namesContainerbox">
+        <button onclick="displayNames()" type="reset">Edit Names</button>
+        <button onclick="removeDisplayNames()" type="reset">Save</button>
+        <p id="namesContainer"></p>
+    </div>
+    <div id="wheelBoy">
+        <canvas id="wheelCanvas" width="500" height="400"></canvas>
+        <button onclick="spinWheel()">Spin</button>
+        <button onclick="stopWheel()">Stop</button>
+    </div>
+</body>
+<script src="spinWheel.js"></script>
+</html>
