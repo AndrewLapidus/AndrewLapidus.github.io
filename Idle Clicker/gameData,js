@@ -1,0 +1,19 @@
+//info on game
+var game = {
+    version: 'V 0.0.0',
+    now: 0,
+    prevNow: new Date
+}
+
+//game data on values of everything?
+var gameData = {
+    tickDuration: 1000
+}
+
+// info on what they do? or like maybe what their tab is in java
+var units = {
+    student: 'temp',
+    junior: 'temp',
+    senior: 'temp',
+    manager: 'temp'
+}
