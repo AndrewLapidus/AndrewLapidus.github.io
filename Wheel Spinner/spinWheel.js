@@ -12,7 +12,7 @@ const CENTER_X = WHEEL_CANVAS.width /2;
 const CENTER_Y = WHEEL_CANVAS.height /2;
 const RADIUS = Math.min(CENTER_X, CENTER_Y) -1;
 const POINTER_LEN = RADIUS *0.8;
-// window.alert('This Code has just been updated and the wheel should \nstop faster  . . . maybe')
+window.alert('This Code has just been updated and the wheel should \nstop faster  . . . maybe')
 function addName(param){
 
     let nameInput = document.getElementById('nameInput')
