@@ -12,7 +12,6 @@ const CENTER_X = WHEEL_CANVAS.width /2;
 const CENTER_Y = WHEEL_CANVAS.height /2;
 const RADIUS = Math.min(CENTER_X, CENTER_Y) -1;
 const POINTER_LEN = RADIUS *0.8;
-window.alert('This Code has just been updated and the wheel should \nstop faster  . . . maybe')
 function addName(param){
 
     let nameInput = document.getElementById('nameInput')
@@ -238,17 +237,10 @@ async function stopWheel() {
 function sleep(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
-addName('Jon');
-addName('Camilla');
-addName('Andrew');
-addName('Daniel');
-addName('Zubin');
-addName('Lara');
-addName('Thibaut');
-addName('Doc');
-addName('Anthony');
-addName('Kevin');
-addName('JJ');
-addName('David');
-
+addName('1');
+addName('2');
+addName('3');
+addName('4');
+addName('5');
+addName('6');
 drawWheel();
