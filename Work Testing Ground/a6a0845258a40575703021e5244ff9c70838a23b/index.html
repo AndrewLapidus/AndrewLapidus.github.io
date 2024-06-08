@@ -7,14 +7,22 @@
     <title>Lowe's Safety tool</title>
 </head>
 
-<body>
-    <div>
+<body class="page">
+    <div class="container">
         <img src="lowesLogo.png" class="banner">
+        <span class="version">V 0.1.1</span>
+
+    </div>
+    <div>
+
     </div>
     <div class="drop-zone" id="drop-zone">
-        <p>Drag & Drop files here or click to upload</p>
-        <input type="file" id="file-input" multiple>
+        <p>Drag & Drop Csv starting from Feb 3rd here or click to upload</p>
+        <input type="file" id="file-input" accept=".csv">
     </div>
+    <div id="departmentTable"></div>
+    <div id="personTable"></div>
+
 
     <script>
         const dropZone = document.getElementById('drop-zone');
@@ -56,29 +64,130 @@
         });
 
         function handleFiles(files) {
-            [...files].forEach(uploadFile);
+            if (files.length !== 1) {
+                alert('Please select only one file.');
+                return;
+            }
+
+            const file = files[0];
+            if (!file.name.endsWith('.csv')) {
+                alert('Please select a CSV file.');
+                return;
+            }
+
+            dropZone.querySelector('p').textContent = 'Uploading...';
+
+            uploadFile(file);
         }
 
         function uploadFile(file) {
-            console.log('File:', file);
-            // Process file here (e.g., upload to server or display preview)
+            // Simulate file upload process cause too lazy
+            setTimeout(() => {
+                // Once uploaded, hide the drop zone
+                dropZone.style.display = 'none';
+                // Call createTableFromCsv after upload is simulated
+                createTableFromCsv(file);
+            }, 4000); // Simulating 4 seconds upload time
+        }
+
+        function createTableFromCsv(file) {
+            Papa.parse(file, {
+                download: true,
+                header: true,
+                complete: function (results) {
+                    const data = results.data;
+
+                    // Calculate total entries
+                    const totalEntries = data.length;
+
+                    // Fill NaN values
+                    data.forEach(row => {
+                        row['Department'] = row['Department'] || 'Unknown';
+                        row['Aisle / Bay'] = row['Aisle / Bay'] || 'Unknown';
+                    });
+
+                    // Calculate department counts
+                    const departmentCounts = data.reduce((acc, row) => {
+                        acc[row['Department']] = (acc[row['Department']] || 0) + 1;
+                        return acc;
+                    }, {});
+
+                    // Convert department counts to DataFrame
+                    const departmentRanking = Object.entries(departmentCounts).map(([department, count]) => ({
+                        Department: department,
+                        "Total Snappy's": count,
+                        'Participation (%)': (count / totalEntries) * 100
+                    }));
+
+                    // Sort department ranking by total Snappy's (optional)
+                    departmentRanking.sort((a, b) => b["Total Snappy's"] - a["Total Snappy's"]);
+
+                    // Display department ranking table
+                    const departmentTable = createTable(departmentRanking, 'Department Ranking');
+                    document.getElementById('departmentTable').appendChild(departmentTable);
+
+                    // Calculate person counts
+                    const personCounts = data.reduce((acc, row) => {
+                        acc[row['Assign to / Corrected by']] = (acc[row['Assign to / Corrected by']] || 0) + 1;
+                        return acc;
+                    }, {});
+
+                    // Convert person counts to DataFrame
+                    const personRanking = Object.entries(personCounts).map(([person, count]) => ({
+                        'Assign to / Corrected by': person,
+                        "Total Snappy's": count,
+                        'Participation (%)': (count / totalEntries) * 100
+                    }));
+
+                    // Sort person ranking by total Snappy's (optional)
+                    personRanking.sort((a, b) => b["Total Snappy's"] - a["Total Snappy's"]);
+
+                    // Display person ranking table
+                    const personTable = createTable(personRanking, 'Person Ranking');
+                    document.getElementById('personTable').appendChild(personTable);
+                }
+            });
+
+            // Function to create HTML table from DataFrame
+            function createTable(data, title) {
+                const table = document.createElement('table');
+                table.innerHTML = `<caption>${title}</caption><thead><tr>${Object.keys(data[0]).map(key => `<th>${key}</th>`).join('')}</tr></thead><tbody>${data.map(row => `<tr>${Object.values(row).map(value => `<td>${value}</td>`).join('')}</tr>`).join('')
+                    }</tbody>`;
+                return table;
+            }
         }
     </script>
 </body>
 
 <style>
-    .banner {
-        display: block;
+    .page {
+        background-color: gray;
+    }
+
+    .container {
+        background-color: wheat;
+        overflow: hidden;
         margin-left: auto;
         margin-right: auto;
-        width: 50%;
-        max-width: 600px;
-        margin-top: 10px;
+        width: auto;
+        max-width: 400px;
+        height: auto;
+        align-items: center;
+    }
+
+    .banner {
+        display: block;
+        float: left;
+    }
+
+    .container span {
+        float: right;
+        font-size: 10px;
     }
 
     .drop-zone {
         width: 300px;
-        height: 200px;
+        height: 150px;
         border: 2px dashed #007BFF;
         border-radius: 10px;
         display: flex;
