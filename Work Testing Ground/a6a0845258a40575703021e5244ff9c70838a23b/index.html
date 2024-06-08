@@ -10,23 +10,35 @@
 <body class="page">
     <div class="container">
         <img src="lowesLogo.png" class="banner">
-        <span class="version">V 0.1.1</span>
+        <span class="version">Built in a Day so no judging! V 0.1.1</span>
 
     </div>
     <div>
-
+        <button onclick="uploadFile('csv_download_30_05_2024_01_20_PM.csv')">Run test</button>
     </div>
     <div class="drop-zone" id="drop-zone">
         <p>Drag & Drop Csv starting from Feb 3rd here or click to upload</p>
         <input type="file" id="file-input" accept=".csv">
     </div>
-    <div id="departmentTable"></div>
-    <div id="personTable"></div>
+    <img src="giphy.gif" id="memez" style="display: none;"/>
+    <div id="howTo"style="display: none;">Feel Free to click on any department or person to see more information</div>
+    <section class="tables">
+
+        <div id="departmentTable" style="display: none;"></div>
+        <div id="personTable" style="display: none;"></div>
+        <div id="detailedData">
+            <canvas id="graph"></canvas>
+        </div>    
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <script>
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file-input');
+        const howTo = document.getElementById('howTo');
 
         // Prevent default drag behaviors
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -71,7 +83,14 @@
 
             const file = files[0];
             if (!file.name.endsWith('.csv')) {
-                alert('Please select a CSV file.');
+                //alert('Please select a CSV file.'); moved for memes
+                dropZone.style.display = 'none';
+                document.getElementById("memez").style.display='block';
+                setTimeout(()=>{
+                    memez.style.display="none";
+                    alert('Please select a CSV file.');
+                    dropZone.style.display='block';
+                },5000)
                 return;
             }
 
@@ -85,9 +104,10 @@
             setTimeout(() => {
                 // Once uploaded, hide the drop zone
                 dropZone.style.display = 'none';
+                howTo.style.display='block';
                 // Call createTableFromCsv after upload is simulated
                 createTableFromCsv(file);
-            }, 4000); // Simulating 4 seconds upload time
+            }, 1000); // Simulating 4 seconds upload time
         }
 
         function createTableFromCsv(file) {
@@ -96,7 +116,17 @@
                 header: true,
                 complete: function (results) {
                     const data = results.data;
-
+                    // kept having errors so the if statment stays
+                    if(data.length >0 && 'Store' in data[0] && data[0]['Store'] === "LOWE'S OF BRIMFIELD TOWNSHIP, OH"){
+                        console.log("All checks out, also why you even reading this")
+                    }else{
+                        console.log("The Csv file is not corrent please make sure it's the right file")
+                        alert("One or more entries are incorrect")
+                        dropZone.style.display='block';
+                        howTo.style.display='none';
+                        dropZone.querySelector('p').textContent="Drag & Drop Csv starting from Feb 3rd here or click to upload"
+                        return;
+                    }
                     // Calculate total entries
                     const totalEntries = data.length;
 
@@ -116,7 +146,7 @@
                     const departmentRanking = Object.entries(departmentCounts).map(([department, count]) => ({
                         Department: department,
                         "Total Snappy's": count,
-                        'Participation (%)': (count / totalEntries) * 100
+                        'Participation (%)': ((count / totalEntries) * 100).toFixed(2)
                     }));
 
                     // Sort department ranking by total Snappy's (optional)
@@ -124,7 +154,22 @@
 
                     // Display department ranking table
                     const departmentTable = createTable(departmentRanking, 'Department Ranking');
+                    departmentTable.querySelector('tbody').addEventListener('click', (event) => {
+                        const departmentName = event.target.closest('tr').querySelector('td').textContent; // Get the department name from the clicked row
+                        if (departmentName) {
+                            // Hide the department and person tables
+                            document.getElementById('departmentTable').style.display = 'none';
+                            document.getElementById('personTable').style.display = 'none';
+                            howTo.style.display='none';
+                            // Show the detailed data for the clicked department 
+                            document.getElementById('detailedData').textContent = `Detailed data for ${departmentName}`;
+                            document.getElementById('detailedData').style.display = 'block';
+                            createGraph(departmentRanking,departmentName);
+                        }
+                    });
                     document.getElementById('departmentTable').appendChild(departmentTable);
+                    document.getElementById('departmentTable').style.display="block";
+
 
                     // Calculate person counts
                     const personCounts = data.reduce((acc, row) => {
@@ -136,7 +181,7 @@
                     const personRanking = Object.entries(personCounts).map(([person, count]) => ({
                         'Assign to / Corrected by': person,
                         "Total Snappy's": count,
-                        'Participation (%)': (count / totalEntries) * 100
+                        'Participation (%)': ((count / totalEntries) * 100).toFixed(2)
                     }));
 
                     // Sort person ranking by total Snappy's (optional)
@@ -144,16 +189,41 @@
 
                     // Display person ranking table
                     const personTable = createTable(personRanking, 'Person Ranking');
+                    personTable.querySelector('tbody').addEventListener('click', (event) => {
+                        const personName = event.target.closest('tr').querySelector('td').textContent; // Get the person name from the clicked row
+                        if (personName) {
+                            // Hide the department and person tables
+                            document.getElementById('departmentTable').style.display = 'none';
+                            document.getElementById('personTable').style.display = 'none';
+                            howTo.style.display='none';
+
+                            // Show the detailed data for the clicked person 
+                            document.getElementById('detailedData').textContent = `Detailed data for ${personName}`;
+                            document.getElementById('detailedData').style.display = 'block';
+                        }
+                    });
                     document.getElementById('personTable').appendChild(personTable);
+                    document.getElementById('personTable').style.display="block";
+                    
                 }
             });
 
             // Function to create HTML table from DataFrame
+            /* And if you are actually reading this, Congrats! 
+            Don't know why but I figured it'd be nice to try and 
+            confuse whoever would read this by tossing everything in here
+            making it hard to read cuz i dunno... 
+            also if you're wondering why I made very questionable choices, don't i'm testing stuff
+            try tossing in a file thats not csv *cough cough**/
             function createTable(data, title) {
                 const table = document.createElement('table');
                 table.innerHTML = `<caption>${title}</caption><thead><tr>${Object.keys(data[0]).map(key => `<th>${key}</th>`).join('')}</tr></thead><tbody>${data.map(row => `<tr>${Object.values(row).map(value => `<td>${value}</td>`).join('')}</tr>`).join('')
                     }</tbody>`;
                 return table;
+            }
+
+            function createGraph(data, target,){
+                const
             }
         }
     </script>
@@ -182,7 +252,7 @@
 
     .container span {
         float: right;
-        font-size: 10px;
+        font-size: 15px;
     }
 
     .drop-zone {
@@ -207,6 +277,19 @@
         margin: 0;
         font-size: 18px;
     }
+    
+    .tables{
+        display: grid;
+        grid-template-columns: 350px 350px;
+        
+        gap: 20px;
+    }
+
+    #departmentTable, #personTable {
+    
+    border: 1px solid #ccc;
+    padding: 10px;
+}
 
     input[type="file"] {
         display: none;
