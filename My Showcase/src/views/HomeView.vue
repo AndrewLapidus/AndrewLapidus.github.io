@@ -33,7 +33,7 @@
 
 <style scoped>
 .header {
-  
+  color: black;
   top: 0;
   left: 0;
 }
