@@ -71,46 +71,46 @@ export default {
                     link: 'tempp',
                     img: 'Vending.png'
                 },
-                {
-                    id: 6,
-                    tagline: 'tag6',
-                    name: 'temp',
-                    description: 'temper',
-                    link: 'tempp',
-                    img: null
-                },
-                {
-                    id: 7,
-                    tagline: 'tag7',
-                    name: 'temp',
-                    description: 'temper',
-                    link: 'tempp',
-                    img: null
-                },
-                {
-                    id: 8,
-                    tagline: 'tag8',
-                    name: 'temp',
-                    description: 'temper',
-                    link: 'tempp',
-                    img: null
-                },
-                {
-                    id: 9,
-                    tagline: 'tag9',
-                    name: 'temp',
-                    description: 'temper',
-                    link: 'tempp',
-                    img: null
-                },
-                {
-                    id: 10,
-                    tagline: 'tag10',
-                    name: 'temp',
-                    description: 'temper',
-                    link: 'tempp',
-                    img: null
-                },
+                // {
+                //     id: 6,
+                //     tagline: 'tag6',
+                //     name: 'temp',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
+                // {
+                //     id: 7,
+                //     tagline: 'tag7',
+                //     name: 'temp',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
+                // {
+                //     id: 8,
+                //     tagline: 'tag8',
+                //     name: 'temp',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
+                // {
+                //     id: 9,
+                //     tagline: 'tag9',
+                //     name: 'temp',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
+                // {
+                //     id: 10,
+                //     tagline: 'tag10',
+                //     name: 'temp',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
                 
             ]
         }

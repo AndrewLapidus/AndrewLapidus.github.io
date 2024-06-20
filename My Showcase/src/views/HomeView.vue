@@ -2,7 +2,7 @@
   <main id="homeViewMain">
     <h1 class='header'>
       Welcome to my page. And excuse the dust while things get setup here!
-      Currently switching over to vue. NOTE: All projects are currently disabled and cannot be accesed during this transition
+      Currently switching over to vue. NOTE: All projects are currently disabled and cannot be accesed during this transition.
     </h1>
     <project-widg/>
     <div>
