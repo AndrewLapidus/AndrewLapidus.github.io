@@ -125,6 +125,10 @@ export default {
 
 
         }
+    },
+    mounted(){
+        window.vm = this;
+        window.projects = this.projects;
     }
 }
 </script>
