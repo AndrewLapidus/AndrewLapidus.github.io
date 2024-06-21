@@ -1,6 +1,6 @@
 {
   "name": "my-showcase",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,12 +11,14 @@
     "deploy": " gh-pages -d dist"
   },
   "dependencies": {
+    "qrcode": "^1.5.3",
+    "vcard-creator": "^0.7.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.2.8",
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.1.1",
+    "vite": "^5.2.8"
   }
 }
