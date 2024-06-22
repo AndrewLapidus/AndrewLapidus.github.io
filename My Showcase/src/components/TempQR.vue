@@ -8,7 +8,7 @@
         </div>
         <div>
           <label for="lastName">Last Name:</label>
-          <input v-model="lastName" type="text" id="lastName" required />
+          <input v-model="lastName" type="text" id="lastName"  />
         </div>
         <div>
           <label for="organization">Organization:</label>
@@ -24,7 +24,7 @@
         </div>
         <div>
           <label for="email">Email:</label>
-          <input v-model="email" type="email" required />
+          <input v-model="email" type="email" />
         </div>
         <button type="submit">Generate QR Code</button>
       </form>
@@ -63,7 +63,7 @@
       }
     },
     methods: {
-      generateQRCode() {
+      async generateQRCode() {
         // new instonnce of vcard
         const vCard = new VCard();
         
@@ -87,7 +87,7 @@
         // Do Stuff to make pretty squares
         try {
           const vCardString = vCard.toString();
-          this.qrCodeData = QRCode.toDataURL(vCardString);
+          this.qrCodeData = await QRCode.toDataURL(vCardString);
         } catch (error) {
           console.error('Error generating QR code:', error);
         }
