@@ -43,25 +43,19 @@
                     description: 'Spin Master is your go-to tool for effortlessly generating random selections from a customizable list. Whether you’re making a decision, organizing a game, or just having fun, Spin Master makes the process exciting and engaging.',
                     link: 'WheelSpinner',
                     img: 'Spinner.png'
-                }
-      ],
-      project1: [
-            {
-                    id: 1,
-                    tagline: 'Random Generator',
-                    name: 'Spin Master: The Ultimate Random Generator',
-                    description: 'Spin Master is your go-to tool for effortlessly generating random selections from a customizable list. Whether you’re making a decision, organizing a game, or just having fun, Spin Master makes the process exciting and engaging.',
-                    link: 'tempp',
-                    img: 'Spinner.png'
                 },
                 {
                     id: 2,
                     tagline: 'VR Mods',
                     name: 'Pavlov VR',
                     description: 'Dive into the immersive world of Pavlov VR, where creativity knows no bounds. As a dedicated creator for Meta Quest, I specialize in crafting custom maps, game modes, and assets using the powerful tools of Unreal Engine 5 and Blender. With a passion for innovation and game design, my creations have garnered over 2000 unique downloads, captivating players with unique experiences.',
-                    link: 'tempp',
+                    link: 'Pavlov',
                     img: 'Pavlov.png'
                 },
+      ],
+      project1: [
+            
+                
                 {
                     id: 3,
                     tagline: "Lowe's Safety Tool",

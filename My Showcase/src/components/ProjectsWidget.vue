@@ -3,8 +3,7 @@
         <div class="record_wrap">
 
 
-            <section class="record" v-for="item in projects" :key="item.id">
-                <router-link id="routerHere" v-bind:to="{name: 'projectView', params: {projectN: item.link}}">
+            <section class="record" v-for="item in projects" :key="item.id" @click="navigateToProject(item)">
                     <div id="record" class="record-display" :style="{ backgroundImage: setBackgroundImg(item) }">
                         <div id="tagline">{{ item.tagline }}</div>
                     </div>
@@ -14,7 +13,6 @@
                             {{ item.description }}
                         </p>
                     </div>
-                </router-link>
             </section>
 
 
@@ -44,6 +42,9 @@ export default {
             return item.img ? `url(${item.img})` : `url(${defaultImg})`;
 
 
+        },
+        navigateToProject(item) {
+            this.$router.push({ name: 'projectView', params: { projectN: item.link } });
         }
     },
     mounted() {
@@ -64,6 +65,7 @@ body {
 a {
     cursor: pointer;
 }
+
 
 .card {
     display: block;
