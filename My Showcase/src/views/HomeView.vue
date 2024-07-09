@@ -13,7 +13,7 @@
     <project-widg :projects="project1"/>
     <div>
       
-      <p>Here are a few projects I've done.</p>
+      <p>Note to everyone here. there is no reason apple os should make black text grey and mostly invisable </p>
       
       <ul>
 
@@ -141,6 +141,9 @@
 
 
 <style scoped>
+#homeViewMain{
+  color: black;
+}
 .header {
   color: black;
   top: 0;

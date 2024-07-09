@@ -1,7 +1,7 @@
 <template>
     <!-- Just so you know, this was such a pain to move from html ans js to vue.
      Most of the time the arrow either was attachted to the wheel or would generate one per section -->
-    <div>
+    <div class="WheelSpinner">
         
       <section>
         <form @submit.prevent="addName">
@@ -231,5 +231,7 @@
   </script>
   
   <style scoped>
-
+.WheelSpinner{
+  color: black;
+}
   </style>

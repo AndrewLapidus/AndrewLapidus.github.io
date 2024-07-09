@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="Pavlov">
   <h1>This page is still under construction!!!</h1>
   <br><br>
   <h2>Using Unreal Engine 5, I develop Mods, Gamemodes, Maps, and Assets for the Vr game Pavlov</h2>
@@ -26,5 +26,7 @@ export default {
 </script>
 
 <style>
-
+.Pavlov{
+    color: black;
+}
 </style>
