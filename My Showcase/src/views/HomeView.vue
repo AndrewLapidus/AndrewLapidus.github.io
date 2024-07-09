@@ -5,19 +5,21 @@
       Currently switching over to vue. NOTE: All projects are currently disabled and cannot be accesed during this transition.
     </h1>
     <temp v-if="showSecret"/>
-    <project-widg/>
+
+
+    <h2>These links are active</h2>
+    <project-widg :projects="completeProg"/>
+    <h2>These links are still locked</h2>
+    <project-widg :projects="project1"/>
     <div>
       
-      <!-- <p>Here are a few projects I've done.</p>
+      <p>Here are a few projects I've done.</p>
       
       <ul>
-        <li>Vending machine Placeholder</li>
-        <li>Tenmo Placeholder</li>
 
-        <li>Property Managment application</li>
 
-        <li>Games in progress</li>
-      </ul> -->
+
+      </ul>
     </div>
   </main>
 </template>
@@ -32,7 +34,100 @@
     },
     data() {
     return {
-      showSecret: false
+      showSecret: false,
+      completeProg:[
+      {
+                    id: 1,
+                    tagline: 'Random Generator',
+                    name: 'Spin Master: The Ultimate Random Generator',
+                    description: 'Spin Master is your go-to tool for effortlessly generating random selections from a customizable list. Whether you’re making a decision, organizing a game, or just having fun, Spin Master makes the process exciting and engaging.',
+                    link: 'WheelSpinner',
+                    img: 'Spinner.png'
+                }
+      ],
+      project1: [
+            {
+                    id: 1,
+                    tagline: 'Random Generator',
+                    name: 'Spin Master: The Ultimate Random Generator',
+                    description: 'Spin Master is your go-to tool for effortlessly generating random selections from a customizable list. Whether you’re making a decision, organizing a game, or just having fun, Spin Master makes the process exciting and engaging.',
+                    link: 'tempp',
+                    img: 'Spinner.png'
+                },
+                {
+                    id: 2,
+                    tagline: 'VR Mods',
+                    name: 'Pavlov VR',
+                    description: 'Dive into the immersive world of Pavlov VR, where creativity knows no bounds. As a dedicated creator for Meta Quest, I specialize in crafting custom maps, game modes, and assets using the powerful tools of Unreal Engine 5 and Blender. With a passion for innovation and game design, my creations have garnered over 2000 unique downloads, captivating players with unique experiences.',
+                    link: 'tempp',
+                    img: 'Pavlov.png'
+                },
+                {
+                    id: 3,
+                    tagline: "Lowe's Safety Tool",
+                    name: 'Safety and AP Reporting Tool',
+                    description: "Lowe's Safety and AP Reporting Tool revolutionizes safety management by providing detailed insights into store safety through comprehensive data analysis. Designed to integrate seamlessly with DoneSafe's CSV files, this tool offers a robust platform for evaluating safety performance across departments and among associates.",
+                    link: 'lowesLogo.png',
+                    img: 'lowesLogo.png'
+                },
+                {
+                    id: 4,
+                    tagline: 'Idle Clicker Game',
+                    name: 'TE Programing School of JB(WIP)',
+                    description: 'Welcome to Code School Tycoon, an idle clicker game, where you embark on a journey to build and manage a thriving programming school that doubles as a product development company. Begin by training aspiring programmers and harness their coding output to create and sell innovative products to consumers worldwide.',
+                    link: 'tempp',
+                    img: 'IdleClicker.png'
+                },
+                {
+                    id: 5,
+                    tagline: 'Virtual Vending Machine',
+                    name: 'Virtual Vending Machine Capstone #1',
+                    description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
+                    link: 'tempp',
+                    img: 'Vending.png'
+                },
+                {
+                    id: 6,
+                    tagline: 'Venmo Clone',
+                    name: 'Tenmo Money Transfer Service',
+                    description: 'temper',
+                    link: 'tempp',
+                    img: null
+                },
+                {
+                    id: 7,
+                    tagline: 'Property Managment',
+                    name: 'Property Managment Application',
+                    description: 'temper',
+                    link: 'tempp',
+                    img: null
+                },
+                {
+                    id: 8,
+                    tagline: "Lowe's Installed Sales Tools",
+                    name: 'temp',
+                    description: 'temper',
+                    link: 'tempp',
+                    img: null
+                },
+                // {
+                //     id: 9,
+                //     tagline: '',
+                //     name: 'temp',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
+                // {
+                //     id: 10,
+                //     tagline: 'tag10',
+                //     name: 'temp',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
+                
+            ]
     };
   },
   mounted() {
