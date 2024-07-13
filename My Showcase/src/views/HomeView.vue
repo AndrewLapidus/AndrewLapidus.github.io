@@ -80,30 +80,30 @@
                     link: 'tempp',
                     img: 'Vending.png'
                 },
-                {
-                    id: 6,
-                    tagline: 'Venmo Clone',
-                    name: 'Tenmo Money Transfer Service',
-                    description: 'temper',
-                    link: 'tempp',
-                    img: null
-                },
-                {
-                    id: 7,
-                    tagline: 'Property Managment',
-                    name: 'Property Managment Application',
-                    description: 'temper',
-                    link: 'tempp',
-                    img: null
-                },
-                {
-                    id: 8,
-                    tagline: "Lowe's Installed Sales Tools",
-                    name: 'temp',
-                    description: 'temper',
-                    link: 'tempp',
-                    img: null
-                },
+                // {
+                //     id: 6,
+                //     tagline: 'Venmo Clone',
+                //     name: 'Tenmo Money Transfer Service',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
+                // {
+                //     id: 7,
+                //     tagline: 'Property Managment',
+                //     name: 'Property Managment Application',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
+                // {
+                //     id: 8,
+                //     tagline: "Lowe's Installed Sales Tools",
+                //     name: 'temp',
+                //     description: 'temper',
+                //     link: 'tempp',
+                //     img: null
+                // },
                 // {
                 //     id: 9,
                 //     tagline: '',
