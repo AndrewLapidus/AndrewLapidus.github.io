@@ -52,6 +52,14 @@
                     link: 'Pavlov',
                     img: 'Pavlov.png'
                 },
+                {
+                    id: 3,
+                    tagline: 'Game Development',
+                    name: 'Unreal Engine Mobile Game Development',
+                    description: 'Description soon to come. Using C++ and Unreal Engine 5 blueprints to develop games.',
+                    link: 'UEDev',
+                    img: 'UELogo.png'
+                },
       ],
       project1: [
             
