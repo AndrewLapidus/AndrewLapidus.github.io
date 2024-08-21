@@ -60,6 +60,14 @@
                     link: 'UEDev',
                     img: 'UELogo.png'
                 },
+                {
+                    id: 4,
+                    tagline: "Lowe's Safety Tool",
+                    name: 'Safety and AP Reporting Tool',
+                    description: "Lowe's Safety and AP Reporting Tool revolutionizes safety management by providing detailed insights into store safety through comprehensive data analysis. Designed to integrate seamlessly with DoneSafe's CSV files, this tool offers a robust platform for evaluating safety performance across departments and among associates.",
+                    link: 'LTool',
+                    img: 'lowesLogo.png'
+                },
       ],
       project1: [
             

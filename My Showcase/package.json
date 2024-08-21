@@ -11,6 +11,7 @@
     "deploy": " gh-pages -d dist"
   },
   "dependencies": {
+    "js-sha1": "^0.7.0",
     "qrcode": "^1.5.3",
     "vcard-creator": "^0.7.0",
     "vue": "^3.4.21",

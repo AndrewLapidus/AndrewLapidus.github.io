@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link v-bind:to="{ name: 'home' }">Back Home</router-link>
+        <router-link v-bind:to="{ name: 'home' }" class="backhome">Back Home</router-link>
 
 
         <component :is="projectComponent"></component>
@@ -15,7 +15,11 @@ export default {
             projectComponent: null
         };
     },
-    async created() {
+    watch:{
+        projectN: 'loadComponent'
+    },
+    methods:{
+    async loadComponent() {
         try {
             // dynamic import to load the component
             const component = await import(`../components/projects/${this.projectN}.vue`);
@@ -27,6 +31,9 @@ export default {
             const errorComponent = await import('../components/ProjectNotFound.vue');
             this.projectComponent = errorComponent.default || errorComponent;
         }
+    }},
+    created(){
+        this.loadComponent()
     }
 };
 </script>
