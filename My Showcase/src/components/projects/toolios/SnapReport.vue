@@ -132,7 +132,7 @@ export default {
         },
         loadAndProcessCSV() {
             // Assuming shit not broke file is named 'csv_download_30_05_2024_01_20_PM.csv' and located in the public folder only in dev 
-            const filePath = '/csv_download_15_06_2024_09_35_AM.csv';
+            const filePath = '';//dont be putting this here
 
             fetch(filePath)
                 .then((response) => {
