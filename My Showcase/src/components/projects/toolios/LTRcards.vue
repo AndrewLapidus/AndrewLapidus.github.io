@@ -30,7 +30,6 @@
           const nameIndex = Math.floor(index * names.length / totalCells);
           return {
             name: names[nameIndex] || '',
-            qrCodeUrl: this.getQRCodeUrl()
           };
         });
         return items;

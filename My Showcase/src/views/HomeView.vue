@@ -4,7 +4,7 @@
       Welcome to my page. And excuse the dust while things get setup here!
       Currently switching over to vue. NOTE: All projects are currently disabled and cannot be accesed during this transition.
     </h1>
-    <temp v-if="showSecret"/>
+
 
 
     <h2>These links are active</h2>
@@ -68,18 +68,13 @@
                     link: 'LTool',
                     img: 'lowesLogo.png'
                 },
+
+                
       ],
       project1: [
             
                 
-                {
-                    id: 3,
-                    tagline: "Lowe's Safety Tool",
-                    name: 'Safety and AP Reporting Tool',
-                    description: "Lowe's Safety and AP Reporting Tool revolutionizes safety management by providing detailed insights into store safety through comprehensive data analysis. Designed to integrate seamlessly with DoneSafe's CSV files, this tool offers a robust platform for evaluating safety performance across departments and among associates.",
-                    link: 'lowesLogo.png',
-                    img: 'lowesLogo.png'
-                },
+                
                 {
                     id: 4,
                     tagline: 'Idle Clicker Game',
@@ -93,9 +88,26 @@
                     tagline: 'Virtual Vending Machine',
                     name: 'Virtual Vending Machine Capstone #1',
                     description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
-                    link: 'tempp',
+                    link: 'Vending',
                     img: 'Vending.png'
                 },
+                {
+                    id: 6,
+                    tagline: 'Shane is sane',
+                    name: 'Christan cartoon',
+                    description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
+                    link: 'Vending',
+                    img: 'Vending.png'
+                },
+                {
+                    id: 7,
+                    tagline: 'Chagrin valley roller rink',
+                    name: 'Website I manage',
+                    description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
+                    link: 'Vending',
+                    img: 'Vending.png'
+                },
+                
                 // {
                 //     id: 6,
                 //     tagline: 'Venmo Clone',
@@ -157,11 +169,7 @@
 
 
 <style scoped>
-#homeViewMain{
-  color: black;
-}
 .header {
-  color: black;
   top: 0;
   left: 0;
 }

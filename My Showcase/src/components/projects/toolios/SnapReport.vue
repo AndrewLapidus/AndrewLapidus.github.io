@@ -131,7 +131,7 @@ export default {
                 .sort((a, b) => b.count - a.count); // Sorta sortin
         },
         loadAndProcessCSV() {
-            // Assuming shit not broke file is named 'csv_download_30_05_2024_01_20_PM.csv' and located in the public folder only in dev 
+            // Assuming shit not broke file is named redacted and located in the public folder only in dev 
             const filePath = '';//dont be putting this here
 
             fetch(filePath)

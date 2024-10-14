@@ -26,7 +26,5 @@ export default {
 </script>
 
 <style>
-.Pavlov{
-    color: black;
-}
+
 </style>

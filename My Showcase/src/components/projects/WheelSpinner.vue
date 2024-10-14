@@ -231,7 +231,4 @@
   </script>
   
   <style scoped>
-.WheelSpinner{
-  color: black;
-}
   </style>

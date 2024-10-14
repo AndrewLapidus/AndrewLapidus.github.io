@@ -1,6 +1,7 @@
 <template>
     <div>
-        <router-link v-bind:to="{ name: 'home' }" class="backhome">Back Home</router-link>
+        <router-link v-bind:to="{ name: 'home' }" class="backhome">Back Home</router-link>|
+        <!-- <router-link v-bind:to="{ name: 'about' }" class="backhome">About</router-link> -->
 
 
         <component :is="projectComponent"></component>

@@ -17,5 +17,6 @@ import { RouterLink, RouterView } from 'vue-router'
   min-height: 100vh; 
   width: 100%; 
   box-sizing: border-box;
+  color: black;
 }
 </style>

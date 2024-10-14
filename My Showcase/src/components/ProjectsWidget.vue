@@ -152,7 +152,6 @@ body {
 }
 
 .record-desc h1 {
-    color: black;
     margin: 5px 0;
     font-size: 1.3em;
     font-weight: 700;
