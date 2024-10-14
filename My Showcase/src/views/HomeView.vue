@@ -88,7 +88,7 @@
                     tagline: 'Virtual Vending Machine',
                     name: 'Virtual Vending Machine Capstone #1',
                     description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
-                    link: 'Vending',
+                    link: 'tempp',
                     img: 'Vending.png'
                 },
                 {
@@ -96,7 +96,7 @@
                     tagline: 'Shane is sane',
                     name: 'Christan cartoon',
                     description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
-                    link: 'Vending',
+                    link: 'tempp',
                     img: 'Vending.png'
                 },
                 {
@@ -104,7 +104,7 @@
                     tagline: 'Chagrin valley roller rink',
                     name: 'Website I manage',
                     description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
-                    link: 'Vending',
+                    link: 'tempp',
                     img: 'Vending.png'
                 },
                 
