@@ -15,10 +15,12 @@
         <button @click="toggleCal">show/hide callender</button>
         <div class="calender" v-show="isVissCal">
         <h2>Plant Watering Calendar</h2>
-        
+        <br>
+        <h3>Please Note the checkboxes are disabled</h3>
+        <br>
         <h3>Overdue</h3>
         <div>
-        <section class="calendercard" v-for="item in plants" :key="item.name">
+        <section class="calendercard" v-for="item in overduePlants" :key="item.name">
             <button type="checkbox"></button>
             <span>{{ item.name }}&nbsp;</span>
             <p> Due: {{ formatNextWater(item.nextWater) }}</p>
@@ -30,7 +32,7 @@
 
         <h3>Due Today</h3>
         <div>
-        <section class="calendercard" v-for="item in plants" :key="item.name">
+        <section class="calendercard" v-for="item in dueTodayPlants" :key="item.name">
             <button type="checkbox"></button>
             <span>{{ item.name }}&nbsp;</span>
             <p> Due: {{ formatNextWater(item.nextWater) }}</p>
@@ -41,7 +43,7 @@
 
         <h3>Due Soon</h3>
         <div>
-        <section class="calendercard" v-for="item in plants" :key="item.name">
+        <section class="calendercard" v-for="item in dueSoonPlants" :key="item.name">
             <button type="checkbox"></button>
             <span>{{ item.name }}&nbsp;</span>
             <p> Due: {{ formatNextWater(item.nextWater) }}</p>
@@ -79,6 +81,7 @@
 
         <div class="plantlist">
             <h2>Plant List</h2>
+            <h3>Please note editing plants are currently disabled</h3>
             <ul>
                 <li v-for="(plant, index) in plants" :key="index">
                     <strong>{{ plant.name }}</strong><br>
