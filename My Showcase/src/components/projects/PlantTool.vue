@@ -14,44 +14,44 @@
         <button @click="toggleForm">show/hide form</button>
         <button @click="toggleCal">show/hide callender</button>
         <div class="calender" v-show="isVissCal">
-        <h2>Plant Watering Calendar</h2>
-        <br>
-        <h3>Please Note the checkboxes are disabled</h3>
-        <br>
-        <h3>Overdue</h3>
-        <div>
-        <section class="calendercard" v-for="item in overduePlants" :key="item.name">
-            <button type="checkbox"></button>
-            <span>{{ item.name }}&nbsp;</span>
-            <p> Due: {{ formatNextWater(item.nextWater) }}</p>
-            <img :src="item.photo" alt="Plant photo" />
-            
-        </section>
-    </div>
+            <h2>Plant Watering Calendar</h2>
+            <br>
+            <h3>Please Note the checkboxes are disabled</h3>
+            <br>
+            <h3>Overdue</h3>
+            <div>
+                <section class="calendercard" v-for="item in overduePlants" :key="item.name">
+                    <input type="checkbox" v-model="item.checked" @change="handleCheckboxChange(item)" /> <span>{{
+                        item.name }}&nbsp;</span>
+                    <p> Due: {{ formatNextWater(item.nextWater) }}</p>
+                    <img :src="item.photo" alt="Plant photo" />
+
+                </section>
+            </div>
 
 
-        <h3>Due Today</h3>
-        <div>
-        <section class="calendercard" v-for="item in dueTodayPlants" :key="item.name">
-            <button type="checkbox"></button>
-            <span>{{ item.name }}&nbsp;</span>
-            <p> Due: {{ formatNextWater(item.nextWater) }}</p>
-            <img :src="item.photo" alt="Plant photo" />
-            
-        </section>
-    </div>
+            <h3>Due Today</h3>
+            <div>
+                <section class="calendercard" v-for="item in dueTodayPlants" :key="item.name">
+                    <input type="checkbox" v-model="item.checked" @change="handleCheckboxChange(item)" /> <span>{{
+                        item.name }}&nbsp;</span>
+                    <p> Due: {{ formatNextWater(item.nextWater) }}</p>
+                    <img :src="item.photo" alt="Plant photo" />
 
-        <h3>Due Soon</h3>
-        <div>
-        <section class="calendercard" v-for="item in dueSoonPlants" :key="item.name">
-            <button type="checkbox"></button>
-            <span>{{ item.name }}&nbsp;</span>
-            <p> Due: {{ formatNextWater(item.nextWater) }}</p>
-            <img :src="item.photo" alt="Plant photo" />
-            
-        </section>
-    </div>
-    </div>
+                </section>
+            </div>
+
+            <h3>Due Soon</h3>
+            <div>
+                <section class="calendercard" v-for="item in dueSoonPlants" :key="item.name">
+                    <input type="checkbox" v-model="item.checked" @change="handleCheckboxChange(item)" /> <span>{{
+                        item.name }}&nbsp;</span>
+                    <p> Due: {{ formatNextWater(item.nextWater) }}</p>
+                    <img :src="item.photo" alt="Plant photo" />
+
+                </section>
+            </div>
+        </div>
 
         <div class="plantform" v-show="isVissForm">
             <h1>Plant Information Form</h1>
@@ -81,6 +81,7 @@
 
         <div class="plantlist">
             <h2>Plant List</h2>
+            <button @click="clearLocalStorage">Clear All Plants</button>
             <h3>Please note editing plants are currently disabled</h3>
             <ul>
                 <li v-for="(plant, index) in plants" :key="index">
@@ -92,6 +93,7 @@
 
 
         </div>
+        
     </div>
 </template>
 
@@ -140,21 +142,39 @@ export default {
         this.plants = JSON.parse(localStorage.getItem('plants')) || [];
     },
     methods: {
+        clearLocalStorage() {
+        localStorage.removeItem('plants'); // Clear from local storage
+        this.plants = []; // Reset plants
+    },
+        handleCheckboxChange(plant) {
+
+            const lastWater = new Date();
+            const nextWater = this.dateHandle(lastWater, plant.waterSchedule);
+
+            plant.lastWater = lastWater;
+            plant.nextWater = nextWater;
+            plant.checked = false;
+            localStorage.setItem('plants', JSON.stringify(this.plants));
+
+
+
+        },
         formatNextWater(nextWater) {
-            const options = { month: 'short', day: '2-digit' }; 
-            return new Date(nextWater).toLocaleDateString(undefined, options); 
+            const options = { month: 'short', day: '2-digit' };
+            return new Date(nextWater).toLocaleDateString(undefined, options);
         },
         toggleForm() {
             this.isVissForm = !this.isVissForm
-            if (this.isVissCal){
-                this.isVissCal= false;
+            if (this.isVissCal) {
+                this.isVissCal = false;
             }
         },
         toggleCal() {
             this.isVissCal = !this.isVissCal
-            if (this.isVissForm){
-                this.isVissForm= false;
-            }        },
+            if (this.isVissForm) {
+                this.isVissForm = false;
+            }
+        },
         updatePlants(newPlants) {
             this.plants = newPlants;
         },
@@ -180,6 +200,7 @@ export default {
                 waterSchedule: this.wateringSchedule,
                 lastWater: lastWater,
                 nextWater: nextWater,
+                checked: false,
             };
 
             this.plants.push(newPlant);
@@ -241,27 +262,28 @@ img {
     padding: 5px;
     max-width: 100%;
 }
+
 .calendercard {
-    display: flex; 
-    align-items: center; 
-    width: 400px; 
-    max-height: 100px; 
+    display: flex;
+    align-items: center;
+    width: 400px;
+    max-height: 100px;
     background-color: grey;
-    padding: 10px; 
-    margin-bottom: 10px; 
-    border-radius: 5px; 
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
     overflow: hidden;
 }
 
 .calendercard img {
-    max-width: 80px; 
-    max-height: 80px; 
-    height: auto; 
-    margin-left: 10px; 
+    max-width: 80px;
+    max-height: 80px;
+    height: auto;
+    margin-left: 10px;
 }
 
 .plant-name {
-    flex-grow: 1; 
-    margin-left: 10px; 
+    flex-grow: 1;
+    margin-left: 10px;
 }
 </style>
