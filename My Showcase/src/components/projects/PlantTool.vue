@@ -80,47 +80,47 @@
         </div>
 
         <div class="plantlist">
-    <h2>Plant List</h2>
-    <p>Please note updating info is messy right now</p>
-    <button @click="clearLocalStorage">Clear All Plants</button>
-    <ul>
-        <li v-for="(plant, index) in plants" :key="index">
-            <div v-if="currentEditIndex === index">
-                
-                <h3>Edit Plant</h3>
-                <form @submit.prevent="saveEdit(index)">
-                    <label for="plantName">Name:</label>
-                    <input type="text" v-model="plantName" required /><br>
+            <h2>Plant List</h2>
+            <p>Please note updating info is messy right now</p>
+            <button @click="clearLocalStorage">Clear All Plants</button>
+            <ul>
+                <li v-for="(plant, index) in plants" :key="index">
+                    <div v-if="currentEditIndex === index">
 
-                    <label for="plantPhoto">Photo:</label>
-                    <input type="file" accept="image/*" @change="handleFileChange" /><br>
+                        <h3>Edit Plant</h3>
+                        <form @submit.prevent="saveEdit(index)">
+                            <label for="plantName">Name:</label>
+                            <input type="text" v-model="plantName" required /><br>
 
-                    <label for="wateringSchedule">Watering Schedule:</label>
-                    <select v-model="wateringSchedule" required>
-                        <option disabled value="">Select Schedule</option>
-                        <option value="Daily">Daily</option>
-                        <option value="Weekly">Weekly</option>
-                        <option value="Biweekly">Biweekly</option>
-                        <option value="Monthly">Monthly</option>
-                    </select><br>
-                    <label for="lastWater">Last Watered:</label>
-                    <input type="text" v-model="lastWater" required /><br>
+                            <label for="plantPhoto">Photo:</label>
+                            <input type="file" accept="image/*" @change="handleFileChange" /><br>
 
-                    <button type="submit">Save</button>
-                    <button @click="cancelEdit">Cancel</button>
-                </form>
-            </div>
-            <div v-else>
-                <!-- Display plant info when not in edit mode cause shit broke! -->
-                <strong>{{ plant.name }}</strong>
-                <img :src="plant.photo" alt="Plant photo" />
-                <button @click="editPlant(index)">Edit</button>
-                <button @click="removePlant(index)">Remove</button>
-            </div>
-        </li>
-    </ul>
-</div>
-      
+                            <label for="wateringSchedule">Watering Schedule:</label>
+                            <select v-model="wateringSchedule" required>
+                                <option disabled value="">Select Schedule</option>
+                                <option value="Daily">Daily</option>
+                                <option value="Weekly">Weekly</option>
+                                <option value="Biweekly">Biweekly</option>
+                                <option value="Monthly">Monthly</option>
+                            </select><br>
+                            <label for="lastWater">Last Watered:</label>
+                            <input type="text" v-model="lastWater" required /><br>
+
+                            <button type="submit">Save</button>
+                            <button @click="cancelEdit">Cancel</button>
+                        </form>
+                    </div>
+                    <div v-else>
+                        <!-- Display plant info when not in edit mode cause shit broke! -->
+                        <strong>{{ plant.name }}</strong>
+                        <img :src="plant.photo" alt="Plant photo" />
+                        <button @click="editPlant(index)">Edit</button>
+                        <button @click="removePlant(index)">Remove</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
     </div>
 </template>
 
@@ -135,7 +135,7 @@ export default {
             previewImage: null,
             wateringSchedule: '',
             lastWater: '',
-            currentEditIndex: null, 
+            currentEditIndex: null,
             plants: JSON.parse(localStorage.getItem('plants')) || [],
         }
     },
@@ -171,45 +171,45 @@ export default {
     },
     methods: {
         clearLocalStorage() {
-        localStorage.removeItem('plants'); // Clear from local storage
-        this.plants = []; // Reset plants
-    },
-    removePlant(index) {
-        this.plants.splice(index, 1); 
-        this.saveData(); 
-    },
-    editPlant(index) {
+            localStorage.removeItem('plants'); // Clear from local storage
+            this.plants = []; // Reset plants
+        },
+        removePlant(index) {
+            this.plants.splice(index, 1);
+            this.saveData();
+        },
+        editPlant(index) {
             const plantToEdit = this.plants[index];
             this.plantName = plantToEdit.name;
             this.previewImage = plantToEdit.photo;
             this.wateringSchedule = plantToEdit.waterSchedule;
-            this.lastWater=plantToEdit.lastWater
-            this.currentEditIndex = index; 
+            this.lastWater = plantToEdit.lastWater
+            this.currentEditIndex = index;
         },
-        
+
         saveEdit(index) {
             const updatedPlant = {
                 name: this.plantName,
                 photo: this.previewImage,
                 waterSchedule: this.wateringSchedule,
-                lastWater: this.lastWater, 
+                lastWater: this.lastWater,
                 nextWater: this.dateHandle(this.lastWater, this.wateringSchedule),
             };
-            this.plants.splice(index, 1, updatedPlant); 
-            this.saveData(); 
+            this.plants.splice(index, 1, updatedPlant);
+            this.saveData();
             this.resetForm();
         },
-        
+
         cancelEdit() {
-            this.resetForm(); 
+            this.resetForm();
         },
-        
+
         resetForm() {
             this.plantName = '';
             this.selectedFile = null;
             this.previewImage = null;
             this.wateringSchedule = '';
-            this.currentEditIndex = null;
+            this.$refs.fileInput.value = '';
         },
         handleCheckboxChange(plant) {
 
@@ -272,10 +272,7 @@ export default {
             this.saveData();
 
             // Reset form fields cause duhh
-            this.plantName = '';
-            this.selectedFile = null;
-            this.previewImage = null;
-            this.wateringSchedule = '';
+            this.resetForm();
         },
         saveData() {
 
