@@ -1,0 +1,1 @@
+import{_ as o,o as t,c as e}from"./index-CGG8RUSb.js";const n={};function r(c,a,s,_,p,l){return t(),e("h1",null,"I'm sorry but I cannot load anything here.")}const d=o(n,[["render",r]]);export{d as default};
