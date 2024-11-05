@@ -74,6 +74,7 @@
                   name: 'Plant watering',
                   description: 'Still being written and being tested',
                   link: 'PlantTool',
+                  img: 'favicon.ico'
                 }
 
                 
