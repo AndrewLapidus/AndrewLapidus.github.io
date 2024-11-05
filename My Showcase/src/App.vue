@@ -18,5 +18,9 @@ import { RouterLink, RouterView } from 'vue-router'
   width: 100%; 
   box-sizing: border-box;
   color: black;
+  
+}
+body{
+  /* background-color: rgb(103, 100, 100); */
 }
 </style>

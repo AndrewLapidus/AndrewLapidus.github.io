@@ -2,7 +2,7 @@
   <main id="homeViewMain">
     <h1 class='header'>
       Welcome to my page. And excuse the dust while things get setup here!
-      Currently switching over to vue. NOTE: All projects are currently disabled and cannot be accesed during this transition.
+      Currently switching over to vue. NOTE: Not all projects are currently avalible and cannot be accesed during this transition.
     </h1>
 
 
@@ -68,6 +68,13 @@
                     link: 'LTool',
                     img: 'lowesLogo.png'
                 },
+                {
+                  id: 5,
+                  tagline:'Plant watering tool',
+                  name: 'Plant watering',
+                  description: 'Still being written and being tested',
+                  link: 'PlantTool',
+                }
 
                 
       ],
