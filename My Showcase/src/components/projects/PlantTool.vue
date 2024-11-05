@@ -60,7 +60,7 @@
                 <input type="text" v-model="plantName" name="plantName" required /><br>
 
                 <label for="plantPhoto">Photo:</label>
-                <input type="file" accept="image/*" @change="handleFileChange" /><br>
+                <input type="file" accept="image/*" ref="fileInput" @change="handleFileChange" /><br>
 
                 <label for="wateringSchedule">Watering Schedule:</label>
                 <select v-model="wateringSchedule" name="wateringSchedule" required>
@@ -93,7 +93,7 @@
                             <input type="text" v-model="plantName" required /><br>
 
                             <label for="plantPhoto">Photo:</label>
-                            <input type="file" accept="image/*" @change="handleFileChange" /><br>
+                            <input type="file" accept="image/*" ref="fileInput" @change="handleFileChange" /><br>
 
                             <label for="wateringSchedule">Watering Schedule:</label>
                             <select v-model="wateringSchedule" required>
@@ -270,13 +270,15 @@ export default {
 
             this.plants.push(newPlant);
             this.saveData();
-
+            alert("plants after submission", this.plants);
             // Reset form fields cause duhh
             this.resetForm();
         },
         saveData() {
 
             localStorage.setItem('plants', JSON.stringify(this.plants));
+            alert("Data saved to localStorage:", JSON.parse(localStorage.getItem('plants')));
+            
         },
         dateHandle(last, schedule) {
             let nextWater = new Date(last);
