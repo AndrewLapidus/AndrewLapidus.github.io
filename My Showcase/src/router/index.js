@@ -9,10 +9,7 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
-    {
-      path: '*',
-      redirect: '/'
-  },
+   
     {
       path: '/project/:projectN',
       name: 'projectView',
