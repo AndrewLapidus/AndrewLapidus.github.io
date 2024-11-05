@@ -245,39 +245,45 @@ export default {
         },
 
         handleFileChange(event) {
-            const file = event.target.files[0];
-            if (file) {
-                this.selectedFile = file;
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.previewImage = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        },
-        handleSubmit() {
-            const lastWater = new Date();
-            const nextWater = this.dateHandle(lastWater, this.wateringSchedule);
-
-            const newPlant = {
-                name: this.plantName,
-                photo: this.previewImage,
-                waterSchedule: this.wateringSchedule,
-                lastWater: lastWater,
-                nextWater: nextWater,
-                checked: false,
-            };
-
-            this.plants.push(newPlant);
+    const file = event.target.files[0];
+    if (file) {
+        this.compressImage(file).then((compressedImage) => {
+            this.previewImage = compressedImage;
             this.saveData();
-            alert("plants after submission", this.plants);
-            // Reset form fields cause duhh
-            this.resetForm();
-        },
+        }).catch((error) => {
+            console.error("Image compression failed:", error);
+        });
+    }
+},
+handleSubmit() {
+    const lastWater = new Date();
+    const nextWater = this.dateHandle(lastWater, this.wateringSchedule);
+
+    const newPlant = {
+        name: this.plantName,
+        photo: this.previewImage,
+        waterSchedule: this.wateringSchedule,
+        lastWater: lastWater,
+        nextWater: nextWater,
+        checked: false,
+    };
+
+    this.plants.push(newPlant);
+    this.saveData();
+    this.resetForm();
+},
         saveData() {
 
-            localStorage.setItem('plants', JSON.stringify(this.plants));
-            alert("Data saved to localStorage:", JSON.parse(localStorage.getItem('plants')));
+            const plantData = this.plants.map(plant => ({
+        name: plant.name,
+        photo: plant.photo, 
+        waterSchedule: plant.waterSchedule,
+        lastWater: plant.lastWater,
+        nextWater: plant.nextWater,
+        checked: plant.checked
+    }));
+    
+    localStorage.setItem('plants', JSON.stringify(plantData));
             
         },
         dateHandle(last, schedule) {
@@ -292,8 +298,36 @@ export default {
                 nextWater.setMonth(nextWater.getMonth() + 1);
             }
             return nextWater;
-        }
-    },
+        },
+        async compressImage(file, quality = 0.7, maxWidth = 300) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    
+                    const scale = maxWidth / img.width;
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scale;
+                    
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    
+                    const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                    resolve(dataUrl);
+                };
+                img.onerror = reject;
+                img.src = event.target.result;
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+}
+    
 }
 </script>
 
