@@ -140,7 +140,7 @@ height: auto;
   }
 
   .ltr_grid {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     padding: 5px;
   }
   form{
