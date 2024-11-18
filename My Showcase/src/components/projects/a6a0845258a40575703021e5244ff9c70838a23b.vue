@@ -8,7 +8,6 @@
     <!-- Conditional display of affection twords my projects -->
     <div v-show="selectedProject === 'LTR'">
       
-      <p>Showing content for LTR project. Still under construction!!!</p>
       <LTR></LTR>
     </div>
     <div v-show="selectedProject === 'Qr'">

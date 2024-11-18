@@ -4,7 +4,7 @@
       <form @submit.prevent="generateQRCode">
         <div>
           <label for="firstName">First Name:</label>
-          <input v-model="firstName" type="text" id="firstName" required />
+          <input v-model="firstName" type="text" id="firstName"  />
         </div>
         <div>
           <label for="lastName">Last Name:</label>
@@ -20,12 +20,16 @@
         </div>
         <div>
           <label for="phone">Phone Number:</label>
-          <input v-model="phone" type="tel" id="phone" required />
+          <input v-model="phone" type="tel" id="phone"  />
         </div>
         <div>
           <label for="email">Email:</label>
           <input v-model="email" type="email" />
         </div>
+        <!-- <div>
+          <label for="website">Website:</label>
+          <input v-model="website" type="url"/>
+        </div> -->
         <button type="submit">Generate QR Code</button>
       </form>
   
@@ -51,6 +55,7 @@
         title: '',
         phone: '',
         email: '',
+        // website: '',
         qrCodeData: null
       };
     },
@@ -83,6 +88,9 @@
         if (this.email) {
           vCard.addEmail(this.email);
         }
+        // if (this.website) {
+        //   vCard.addURL(this.website)
+        // }
   
         // Do Stuff to make pretty squares
         try {
