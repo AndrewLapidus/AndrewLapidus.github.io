@@ -2,7 +2,7 @@
   <main id="homeViewMain">
     <h1 class='header'>
       Welcome to my page. And excuse the dust while things get setup here!
-      Currently switching over to vue. NOTE: Not all projects are currently avalible and cannot be accesed during this transition. V 0.1.13
+      Currently switching over to vue. NOTE: Not all projects are currently avalible and cannot be accesed during this transition. V 0.1.14
     </h1>
 
 
@@ -88,7 +88,7 @@
                     tagline: 'Idle Clicker Game',
                     name: 'TE Programing School of JB(WIP)',
                     description: 'Welcome to Code School Tycoon, an idle clicker game, where you embark on a journey to build and manage a thriving programming school that doubles as a product development company. Begin by training aspiring programmers and harness their coding output to create and sell innovative products to consumers worldwide.',
-                    link: 'tempp',
+                    link: 'IdleClicker',
                     img: 'IdleClicker.png'
                 },
                 {
