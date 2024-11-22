@@ -4,15 +4,15 @@
 
 
             <section class="record" v-for="item in projects" :key="item.id" @click="navigateToProject(item)">
-                    <div id="record" class="record-display" :style="{ backgroundImage: setBackgroundImg(item) }">
-                        <div id="tagline">{{ item.tagline }}</div>
-                    </div>
-                    <div class="record-desc">
-                        <h1>{{ item.name }}</h1>
-                        <p>
-                            {{ item.description }}
-                        </p>
-                    </div>
+                <div id="record" class="record-display" :style="{ backgroundImage: setBackgroundImg(item) }">
+                    <div id="tagline">{{ item.tagline }}</div>
+                </div>
+                <div class="record-desc">
+                    <h1>{{ item.name }}</h1>
+                    <p>
+                        {{ item.description }}
+                    </p>
+                </div>
             </section>
 
 
@@ -27,6 +27,18 @@
 import defaultImg from '../assets/defaultShowcase.webp'
 // import defaultImg from '../assets/download.png'
 export default {
+    // Getting drops in performance. Lokking into it!
+    beforeRouteLeave(to, from, next) {
+        // Add logic to stop or reset animations before leaving the page
+        const records = document.querySelectorAll('.record');
+        records.forEach(record => {
+            // Reset any active animation or transition
+            record.style.transition = 'none';  // Remove transition temporarily
+            record.style.opacity = 1;  // Ensure the opacity is reset
+        });
+
+        next();
+    },
     props: {
         projects: {
             type: Array,
@@ -96,9 +108,7 @@ a {
     box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.12), 0 -1px 2px rgba(0, 0, 0, 0.24);
 }
 
-body {
-    background-color: #f2f2f2;
-}
+
 
 .record_wrap {
     width: 90%;
@@ -146,9 +156,15 @@ body {
 }
 
 .record-desc {
-    margin: 20px 0 0 10px;
-    opacity: 0;
+    /* Check difference on old stuff.
+      margin: 20px 0 0 10px;
+      opacity: 0;
     transition: opacity 400ms ease-in-out 190ms;
+*/
+    transform: translateY(20px);
+    /* Start position */
+    opacity: 0;
+    /* Start opacity */
 }
 
 .record-desc h1 {
@@ -169,6 +185,7 @@ body {
 }
 
 .record:hover .record-desc {
+    transform: translateY(0);
     opacity: 1;
 }
 

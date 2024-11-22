@@ -21,6 +21,6 @@ import { RouterLink, RouterView } from 'vue-router'
   
 }
 body{
-  /* background-color: rgb(103, 100, 100); */
+  background-color: rgb(214, 208, 208);
 }
 </style>
