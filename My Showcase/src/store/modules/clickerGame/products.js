@@ -1,4 +1,5 @@
 export const products = [
+    //why the fuck did i have modifyer here again??? prob upgrades down the line
     {
         id:1,
         name: 'Hello World!',

@@ -26,7 +26,7 @@
             <div class="upgrades" v-for="up in upgrades" :key="up.id" v-show="isUpViss" @click.stop>
                 <h3>{{ up.name }}</h3>
                 <p>{{ up.cost }}</p>
-                <button class="buyUpBTN" >Buy</button>
+                <button class="buyUpBTN">Buy</button>
             </div>
 
             <div class="achievements" v-show="isAchViss" @click.stop>
@@ -63,11 +63,12 @@
             <div class="product" v-for="prod in products" :key="prod.id">
                 <h3>{{ prod.name }}</h3>
                 <!-- Change to func to calc mod -->
-                <p>Lines Required {{ prod.cost }}</p> 
+                <p>Lines Required {{ calcProdCost(prod.id).toFixed(2) }}</p>
 
-                <button @click="sellProd(prod.id)">Sell for ${{ prod.baseValue }}</button>
+                <button @click="sellProdAct(prod.id)">Sell for ${{ prod.baseValue }}</button>
             </div>
         </div>
+        <!-- {{ $store.state }} -->
     </div>
 
 </template>
@@ -87,14 +88,14 @@ export default {
 
     computed: {
         ...mapState('clickerGame', ['money', 'clickCount', 'linesOcode', 'units', 'moneyRate', 'products', 'upgrades', 'achievements', 'prestige', 'settings']),
-        ...mapGetters('clickerGame', ['calcUnitCost', 'linesRate', 'buyUnitText', 'calcModUpgrade',]),
+        ...mapGetters('clickerGame', ['calcUnitCost', 'linesRate', 'buyUnitText', 'calcModUpgrade', 'calcProdCost']),
         unitsAvail() {
             return this.units.filter((unit) => unit.available)
         }
     },
     methods: {
-        ...mapMutations('clickerGame', ['WhaleClick', 'buyUnit', 'sellProd',]),
-
+        ...mapMutations('clickerGame', ['WhaleClick', 'buyUnit',]),
+        ...mapActions('clickerGame', ['sellProdAct',]),
         // getNextCost(unitId) {
         //     return this.calcUnitCost(unitId);
         // },
@@ -107,6 +108,7 @@ export default {
             this.closeAllMenus()
             this.isMenuOpen = true;
             this[menu] = true;
+            console.log('Menu Opened:', menu, this[menu]); //debuggin shit
         },
 
         // Close all menus
@@ -116,6 +118,7 @@ export default {
             this.isAchViss = false;
             this.isPristViss = false;
             this.isSettViss = false;
+            console.log('All menus closed'); // check in out the view
         },
 
         // Close specific menus
@@ -136,28 +139,15 @@ export default {
             this.isMenuOpen = false;
         },
 
-        // Close the open menu when clicking outside
-        handleClickOutside(event) {
-            const menu = this.$el;
-            if (!menu.contains(event.target)) {
-                this.closeAllMenus();
-            }
-        }
+       
 
     },
-    created() {
+
+    mounted() {
         this.gameInterval = setInterval(this.updateGame, 1000);
     },
-    destroyed() {
-        clearInterval(this.gameInterval)
-    },
-    mounted() {
-        // Attach a global click listener to close menu when clicking outside
-        document.addEventListener('click', this.handleClickOutside);
-    },
     beforeDestroy() {
-        // Clean up the event listener when the component is destroyed
-        document.removeEventListener('click', this.handleClickOutside);
+        clearInterval(this.gameInterval);
     }
 
 }
@@ -193,6 +183,7 @@ export default {
     font-size: 18px;
     text-align: center;
 }
+
 .close-btn {
     position: absolute;
     top: 10px;

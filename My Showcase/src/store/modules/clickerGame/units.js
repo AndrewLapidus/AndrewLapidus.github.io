@@ -9,8 +9,9 @@ export const units = [
             return Math.floor((1 / 126) * Math.pow(owned - 10, 3) + baseCost)
         },
         productionRate: 0.1,
+        prodMod:0.30,
         owned: 0,
-        cap: 10,
+        cap: 7,
         available: true,
     },
     {
@@ -23,7 +24,9 @@ export const units = [
             return Math.floor((1 / 126) * Math.pow(owned - 37, 3) + baseCost)
         },
         productionRate: 1.0,
+        prodMod:0.5,
         owned: 0,
+        cap: 10,
         available: false,
     },
     {
@@ -36,7 +39,9 @@ export const units = [
             return Math.floor((1 / 126) * Math.pow(owned - 40, 3) + baseCost)
         },
         productionRate: 10.0,
+        prodMod:0.5,
         owned: 0,
+        cap: 10,
         available: false,
     },
     {
@@ -49,7 +54,9 @@ export const units = [
             return Math.floor((1 / 126) * Math.pow(owned - 40, 3) + baseCost)
         },
         productionRate: 50.0,
+        prodMod:0.5,
         owned: 0,
+        cap: 10,
         available: false,
     },
     

@@ -6,9 +6,9 @@ export const clickerGame = {
     state: {
         clickCount: 0,
         money: 0,
-        moneyRate:0,
+        moneyRate: 0,
         linesOcode: 0,
-        linesRate:0,
+        linesRate: 0,
         units: units,
         products: products,
         upgrades: upgrades,
@@ -26,7 +26,7 @@ export const clickerGame = {
         buyUnit(state, unitId) {
             const unit = state.units.find((u) => u.id === unitId);
             const cost = unit.costEquation(unit.owned, unit.baseCost);
-            if (unit.owned >= unit.cap){
+            if (unit.owned >= unit.cap) {
                 return
             }
             if (state.money >= cost) {
@@ -34,31 +34,41 @@ export const clickerGame = {
                 unit.owned++;
             }
         },
-        sellProd(state, prodId){
-            const prod = state.products.find((p) => p.id = prodId)
-            const cost = prod.cost
-            if (state.linesOcode >= cost){
-                state.money += prod.baseValue;
-                state.linesOcode -= prod.cost
-            }
+        sellProd(state, {prodId, req}) {
+            const prod = state.products.find((p) => p.id === prodId)
+
+            state.money += prod.baseValue;
+            state.linesOcode -= req
+
         },
         produceResources(state) {
             // Calculate linesRate directly
             const linesRate = state.units.reduce(
-              (total, unit) => total + unit.productionRate * unit.owned,
-              0
+                (total, unit) => total + unit.productionRate * unit.owned,
+                0
             );
             state.linesOcode += linesRate;
-          },
+        },
+
     },
     getters: {
-         
+        // calcs iguess
         calcUnitCost: (state) => (unitId) => {
             const unit = state.units.find(u => u.id === unitId);
-            if (unit){
+            if (unit) {
                 return unit.costEquation(unit.owned, unit.baseCost);
             }
-          return 0
+            return 0
+        },
+        calcProdCost: (state) => (prodId) => {
+            const prod = state.products.find(p => p.id === prodId);
+            let rateIncr = state.units.reduce(
+                (total, unit) => total + unit.prodMod * unit.owned, 0
+            );
+            //add 1?
+            rateIncr += 1
+            return prod.cost * rateIncr
+
         },
         linesRate(state) {
             return state.units.reduce(
@@ -66,19 +76,29 @@ export const clickerGame = {
                 0
             );
         },
-        
-        buyUnitText: (state) => (unitId) =>{
+
+        buyUnitText: (state) => (unitId) => {
             const unit = state.units.find(u => u.id === unitId);
-            if (unit.owned >= unit.cap){
+            if (unit.owned >= unit.cap) {
                 return unit.name + ' is capped'
             }
             return 'Buy More'
         },
-        calcModUpgrade: (state) => (upId) =>{
+        // needs fixin
+        calcModUpgrade: (state) => (upId) => {
             const up = state.upgrades.find(u => u.id === upId)
-            if (up){
+            if (up) {
                 return up.modEquation(up.own)
             }
         }
-      },
-    };
+    },
+    actions: {
+        sellProdAct({ getters, commit, state }, prodId) {
+            const require = getters.calcProdCost(prodId);
+            if (state.linesOcode >= require) {
+                commit('sellProd', { prodId, req: require })
+            }
+        }
+    }
+
+};
