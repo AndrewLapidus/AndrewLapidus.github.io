@@ -11,7 +11,7 @@ export const units = [
         productionRate: 0.1,
         prodMod:0.30,
         owned: 0,
-        cap: 7,
+        cap: 2,
         available: true,
     },
     {

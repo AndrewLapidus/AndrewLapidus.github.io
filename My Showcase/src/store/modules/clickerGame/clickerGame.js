@@ -4,6 +4,7 @@ import { upgrades } from "./upgrades"
 export const clickerGame = {
     namespaced: true,
     state: {
+        version: 'V 0.0.3',
         clickCount: 0,
         money: 0,
         moneyRate: 0,
@@ -22,7 +23,7 @@ export const clickerGame = {
             state.money += state.whaleAmnt;
             state.clickCount += 1;
         },
-
+        // Buy section
         buyUnit(state, unitId) {
             const unit = state.units.find((u) => u.id === unitId);
             const cost = unit.costEquation(unit.owned, unit.baseCost);
@@ -34,6 +35,21 @@ export const clickerGame = {
                 unit.owned++;
             }
         },
+        buyUp(state,{ up, req, targetMod}) {
+            let id = up.id
+        
+            if (up.own >= up.cap){
+                return
+            }
+            if (state.money >= req){
+                state.money -= req
+                state[up.object][up.id][up.target] = targetMod
+                state.upgrades[id].own += 1;
+                
+                
+            }
+        },
+        // Sell section
         sellProd(state, {prodId, req}) {
             const prod = state.products.find((p) => p.id === prodId)
 
@@ -49,6 +65,10 @@ export const clickerGame = {
             );
             state.linesOcode += linesRate;
         },
+
+
+
+        
 
     },
     getters: {
@@ -70,13 +90,19 @@ export const clickerGame = {
             return prod.cost * rateIncr
 
         },
+        calcUpCost: (state) => (upId) =>{
+            const up = state.upgrades.find(u => u.id === upId);
+            if (up){
+                return up.costEquation(up.own, up.baseCost, up.cap)
+            }
+        },
         linesRate(state) {
             return state.units.reduce(
                 (total, unit) => total + unit.productionRate * unit.owned,
                 0
             );
         },
-
+        // rework to plain max and add target/focus so it can be reused
         buyUnitText: (state) => (unitId) => {
             const unit = state.units.find(u => u.id === unitId);
             if (unit.owned >= unit.cap) {
@@ -85,10 +111,10 @@ export const clickerGame = {
             return 'Buy More'
         },
         // needs fixin
-        calcModUpgrade: (state) => (upId) => {
-            const up = state.upgrades.find(u => u.id === upId)
+        calcModUpgrade: (state) =>(upId) => {
+            const up = state.upgrades.find(u => u.id === upId);
             if (up) {
-                return up.modEquation(up.own)
+                return up.targetModEquation(up.own)
             }
         }
     },
@@ -98,7 +124,18 @@ export const clickerGame = {
             if (state.linesOcode >= require) {
                 commit('sellProd', { prodId, req: require })
             }
-        }
+        },
+        buyUpgradeAct({getters, commit, state}, up) {
+            const require = getters.calcUpCost(up.id)
+            const targMod = getters.calcModUpgrade(up.id)
+            if (state.money >= require){
+                commit('buyUp',{up, req: require, targetMod: targMod} )
+            }
+        },
+
+
+
+       
     }
 
 };

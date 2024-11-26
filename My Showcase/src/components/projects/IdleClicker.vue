@@ -1,7 +1,7 @@
 <template>
     <!-- I'm hating all of this so shut up -->
     <div class="idleContainer">
-        V 0.0.1
+        {{ version }}
         <div class="topInfo">
             <div class="stats">
                 Money: {{ money.toFixed(2) }} <span class="moneyRate">+{{ moneyRate.toFixed(2) }}/sec</span><br>
@@ -23,10 +23,13 @@
 
         <div class="menuTab" v-show="isMenuOpen">
             <button class="close-btn" @click="closeAllMenus">X</button>
-            <div class="upgrades" v-for="up in upgrades" :key="up.id" v-show="isUpViss" @click.stop>
-                <h3>{{ up.name }}</h3>
-                <p>{{ up.cost }}</p>
-                <button class="buyUpBTN">Buy</button>
+            <div class="upgradeTab">
+                <div class="upgrades" v-for="up in upgrades" :key="up.id" v-show="isUpViss" @click.stop>
+                    <h3>{{ up.name }}</h3>
+                    <p>{{ calcUpCost(up.id) }}</p>
+                    <button class="buyUpBTN" @click="buyUpgradeAct(up)">Buy</button>
+                    <p>{{ up.description }}</p>
+                </div>
             </div>
 
             <div class="achievements" v-show="isAchViss" @click.stop>
@@ -39,6 +42,7 @@
 
             <div class="settings" v-show="isSettViss" @click.stop>
                 <h3>This is the setting tab</h3>
+                <!-- <button @click="resetGame">Reset Game</button> -->
                 <!-- add patchnotes -->
             </div>
 
@@ -55,6 +59,7 @@
                 <p>QTY: {{ unit.owned }}</p>
                 <p>Cost: {{ calcUnitCost(unit.id) }}</p>
                 <button @click="buyUnit(unit.id)">{{ buyUnitText(unit.id) }}</button>
+                
 
 
             </div>
@@ -87,15 +92,15 @@ export default {
     },
 
     computed: {
-        ...mapState('clickerGame', ['money', 'clickCount', 'linesOcode', 'units', 'moneyRate', 'products', 'upgrades', 'achievements', 'prestige', 'settings']),
-        ...mapGetters('clickerGame', ['calcUnitCost', 'linesRate', 'buyUnitText', 'calcModUpgrade', 'calcProdCost']),
+        ...mapState('clickerGame', ['money', 'clickCount', 'linesOcode', 'units', 'moneyRate', 'products', 'upgrades', 'achievements', 'prestige', 'settings', 'version']),
+        ...mapGetters('clickerGame', ['calcUnitCost', 'linesRate', 'buyUnitText', 'calcModUpgrade', 'calcProdCost', 'calcUpCost',]),
         unitsAvail() {
             return this.units.filter((unit) => unit.available)
         }
     },
     methods: {
         ...mapMutations('clickerGame', ['WhaleClick', 'buyUnit',]),
-        ...mapActions('clickerGame', ['sellProdAct',]),
+        ...mapActions('clickerGame', ['sellProdAct','buyUpgradeAct',]),
         // getNextCost(unitId) {
         //     return this.calcUnitCost(unitId);
         // },
@@ -139,16 +144,23 @@ export default {
             this.isMenuOpen = false;
         },
 
-       
+
 
     },
 
     mounted() {
         this.gameInterval = setInterval(this.updateGame, 1000);
+        // this.saveInterval - setInterval(()=>{
+        //     this.$store.dispatch('clickerGame/saveGame');
+        // }, 60000)
     },
     beforeDestroy() {
         clearInterval(this.gameInterval);
-    }
+        // clearInterval(this.saveInterval);
+    },
+//     created() {
+//     this.$store.dispatch('clickerGame/loadGame');
+// }
 
 }
 </script>
@@ -166,7 +178,7 @@ export default {
 }
 
 .menuTab {
-    display: none;
+
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 500px;
     height: 500px;
@@ -182,7 +194,29 @@ export default {
     align-items: center;
     font-size: 18px;
     text-align: center;
+
 }
+/* this is STUPID */
+.upgradeTab {
+    height: 100%; 
+    width: 100%; 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; 
+    padding: 40px; 
+    overflow: auto; 
+}
+
+.upgrades {
+    background-color: #9c9a9a;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; 
+    height: 150px;
+}
+
 
 .close-btn {
     position: absolute;
