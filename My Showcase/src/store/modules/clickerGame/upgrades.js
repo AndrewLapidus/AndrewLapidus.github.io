@@ -3,7 +3,7 @@ export const upgrades = [
     {
         id: 1,
         name: "Student Cap",
-        description: "use",
+        description: "Does what you think it does",
         costEquation: (own, baseCost, cap) =>{
             if (own <= cap){
                 return (own*2)+baseCost

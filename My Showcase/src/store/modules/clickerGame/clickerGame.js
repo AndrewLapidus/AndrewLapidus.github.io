@@ -1,10 +1,11 @@
 import { units } from "./units";
 import { products } from "./products";
 import { upgrades } from "./upgrades"
+
 export const clickerGame = {
     namespaced: true,
     state: {
-        version: 'V 0.0.3',
+        version: 'V 0.0.4',
         clickCount: 0,
         money: 0,
         moneyRate: 0,
@@ -67,6 +68,52 @@ export const clickerGame = {
         },
 
 
+        // loading section
+        // Do not under any circumstance ask me how this works. 
+        // I removed a state[key]= from second Object.keys because I was frusterated and somehow everything loaded just fine.
+        // I'm currently ripping out my hair over what bs i just witnessed
+        loadState(state, newState) {
+            Object.keys(state).forEach((key) => {
+                let arrState = []
+                let arrNew = []
+                if (Array.isArray(newState[key])){
+                    arrState = state[key]
+                    arrNew = newState[key]
+                    // itter through array object
+                    arrState.map((item, index) =>{
+                        //item object
+                        Object.keys(item).forEach((key) => {
+                            if(arrNew[index][key] !== undefined){
+                                if (key !== "description"){
+                                item[key] = arrNew[index][key]
+                                }
+                                
+                            }
+                            else{
+                                item[key]=item[key]
+                            }
+                        })
+                    })
+
+                                    
+
+                }
+                else{
+                    if (newState[key] !== undefined) {
+                        state[key] = newState[key];
+                    }}
+                
+               
+            });
+        },
+        resetState(state) {
+            Object.keys(defaultState).forEach((key) => {
+                state[key] = JSON.parse(JSON.stringify(defaultState[key])); // Deep copy to avoid mutation issues
+            });
+            // console.log(state)
+        },
+
+
 
         
 
@@ -91,9 +138,9 @@ export const clickerGame = {
 
         },
         calcUpCost: (state) => (upId) =>{
-            const up = state.upgrades.find(u => u.id === upId);
-            if (up){
-                return up.costEquation(up.own, up.baseCost, up.cap)
+            const upg = state.upgrades.find(u => u.id === upId);
+            if (upg){
+                return upg.costEquation(upg.own, upg.baseCost, upg.cap)
             }
         },
         linesRate(state) {
@@ -134,8 +181,52 @@ export const clickerGame = {
         },
 
 
+        // saving and loading section
+        saveGame({ state }) {
+            const gameState = JSON.stringify(state);
+            localStorage.setItem('clickerGameState', gameState);
+            console.log('Game saved');
+            // console.log(state)
+        },
+
+
+        loadGame({ commit }) {
+            const savedState = localStorage.getItem('clickerGameState');
+            if (savedState) {
+                const parsedState = JSON.parse(savedState);
+                commit('loadState', parsedState);
+                console.log('Game loaded');
+            } else {
+                console.log('No saved game found');
+            }
+        },
+
+        resetGame({ commit }) {
+            commit('resetState');
+            localStorage.removeItem('clickerGameState'); // Clear saved game
+            console.log('Game reset');
+        },
+
+
+
+
 
        
     }
 
 };
+
+
+const defaultState = () =>({
+    version: 'V 0.0.4',
+        clickCount: 0,
+        money: 0,
+        moneyRate: 0,
+        linesOcode: 0,
+        linesRate: 0,
+        units: [...units],
+        products: [...products],
+        upgrades: [...upgrades],
+        whaleAmnt: 0.1,
+        achievements: [],
+})

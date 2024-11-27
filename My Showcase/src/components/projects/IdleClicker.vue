@@ -1,7 +1,7 @@
 <template>
     <!-- I'm hating all of this so shut up -->
     <div class="idleContainer">
-        {{ version }}
+        <div class="version">{{ version }}</div>
         <div class="topInfo">
             <div class="stats">
                 Money: {{ money.toFixed(2) }} <span class="moneyRate">+{{ moneyRate.toFixed(2) }}/sec</span><br>
@@ -28,7 +28,7 @@
                     <h3>{{ up.name }}</h3>
                     <p>{{ calcUpCost(up.id) }}</p>
                     <button class="buyUpBTN" @click="buyUpgradeAct(up)">Buy</button>
-                    <p>{{ up.description }}</p>
+                    <!-- <p class="toolTip">{{ up.description }}</p> -->
                 </div>
             </div>
 
@@ -42,7 +42,8 @@
 
             <div class="settings" v-show="isSettViss" @click.stop>
                 <h3>This is the setting tab</h3>
-                <!-- <button @click="resetGame">Reset Game</button> -->
+                reset does not work yet
+                <button @click="resetGame">Reset Game</button>
                 <!-- add patchnotes -->
             </div>
 
@@ -59,7 +60,7 @@
                 <p>QTY: {{ unit.owned }}</p>
                 <p>Cost: {{ calcUnitCost(unit.id) }}</p>
                 <button @click="buyUnit(unit.id)">{{ buyUnitText(unit.id) }}</button>
-                
+
 
 
             </div>
@@ -100,7 +101,7 @@ export default {
     },
     methods: {
         ...mapMutations('clickerGame', ['WhaleClick', 'buyUnit',]),
-        ...mapActions('clickerGame', ['sellProdAct','buyUpgradeAct',]),
+        ...mapActions('clickerGame', ['sellProdAct', 'buyUpgradeAct', 'loadGame', 'saveGame', 'resetGame', 'calc']),
         // getNextCost(unitId) {
         //     return this.calcUnitCost(unitId);
         // },
@@ -113,7 +114,7 @@ export default {
             this.closeAllMenus()
             this.isMenuOpen = true;
             this[menu] = true;
-            console.log('Menu Opened:', menu, this[menu]); //debuggin shit
+            // console.log('Menu Opened:', menu, this[menu]); //debuggin shit
         },
 
         // Close all menus
@@ -123,7 +124,7 @@ export default {
             this.isAchViss = false;
             this.isPristViss = false;
             this.isSettViss = false;
-            console.log('All menus closed'); // check in out the view
+            // console.log('All menus closed'); // check in out the view
         },
 
         // Close specific menus
@@ -150,22 +151,26 @@ export default {
 
     mounted() {
         this.gameInterval = setInterval(this.updateGame, 1000);
-        // this.saveInterval - setInterval(()=>{
-        //     this.$store.dispatch('clickerGame/saveGame');
-        // }, 60000)
+        this.saveInterval - setInterval(() => {
+            this.$store.dispatch('clickerGame/saveGame');
+        }, 60000)
     },
     beforeDestroy() {
         clearInterval(this.gameInterval);
-        // clearInterval(this.saveInterval);
+        clearInterval(this.saveInterval);
     },
-//     created() {
-//     this.$store.dispatch('clickerGame/loadGame');
-// }
+    created() {
+        this.$store.dispatch('clickerGame/loadGame');
+    }
 
 }
 </script>
 
 <style>
+.idleContainer {
+    user-select: none;
+}
+
 .topInfo {
     display: flex;
 }
@@ -176,6 +181,7 @@ export default {
     width: 250px;
     height: 100px;
 }
+
 
 .menuTab {
 
@@ -194,29 +200,55 @@ export default {
     align-items: center;
     font-size: 18px;
     text-align: center;
+    overflow: visible;
 
 }
+
 /* this is STUPID */
 .upgradeTab {
-    height: 100%; 
-    width: 100%; 
+    height: 100%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px; 
-    padding: 40px; 
-    overflow: auto; 
+    gap: 10px;
+    padding: 40px;
+    overflow: auto;
 }
 
 .upgrades {
+    position: relative;
     background-color: #9c9a9a;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center; 
+    text-align: center;
     height: 150px;
+    /* cursor: pointer; */
 }
 
+/* .upgrades .toolTip {
+    visibility: hidden; 
+    width: 200px; 
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: #fff; 
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: fixed;
+    z-index: 11;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-100%);
+    opacity: 0; 
+    transition: opacity 0.3s; 
+    
+}
+
+.upgrades:hover .toolTip {
+    visibility: visible; 
+    opacity: 1; 
+} */
 
 .close-btn {
     position: absolute;
@@ -278,5 +310,61 @@ export default {
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 500px) {
+    .backhome {
+        position: fixed;
+        top: 5px;
+        left: 5px;
+    }
+
+    .version {
+        position: fixed;
+        top: 5px;
+        left: 100px;
+    }
+
+    .stats {
+        position: fixed;
+        top: 30px;
+        left: 5px;
+        padding: 8px;
+        font-size: 12px;
+        width: 200px;
+    }
+
+    .menuBar {
+        position: fixed;
+        top: 30px;
+        left: 207px;
+
+        width: auto;
+    }
+
+    .whale {
+        position: fixed;
+        top: 250px;
+    }
+
+    .productBar {
+        position: fixed;
+        top: 370px;
+        left: 10px;
+    }
+
+    .menuTab {
+        width: 75%;
+        height: 50%;
+
+    }
+
+    .unitBar {
+        position: fixed;
+        top: 370px;
+        left: 230px;
+    }
+
+
 }
 </style>
