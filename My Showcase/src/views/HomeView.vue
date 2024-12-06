@@ -75,7 +75,15 @@
                   description: 'Still being written and being tested',
                   link: 'PlantTool',
                   img: 'favicon.ico'
-                }
+                },
+                {
+                    id: 6,
+                    tagline: 'Idle Clicker Game',
+                    name: 'TE Programing School of JB(WIP)',
+                    description: 'Currently moving from Java to here!!!  Welcome to Code School Tycoon, an idle clicker game, where you embark on a journey to build and manage a thriving programming school that doubles as a product development company. Begin by training aspiring programmers and harness their coding output to create and sell innovative products to consumers worldwide.',
+                    link: 'IdleClicker',
+                    img: 'IdleClicker.png'
+                },
 
                 
       ],
@@ -83,14 +91,7 @@
             
                 
                 
-                {
-                    id: 4,
-                    tagline: 'Idle Clicker Game',
-                    name: 'TE Programing School of JB(WIP)',
-                    description: 'Welcome to Code School Tycoon, an idle clicker game, where you embark on a journey to build and manage a thriving programming school that doubles as a product development company. Begin by training aspiring programmers and harness their coding output to create and sell innovative products to consumers worldwide.',
-                    link: 'IdleClicker',
-                    img: 'IdleClicker.png'
-                },
+                
                 {
                     id: 5,
                     tagline: 'Virtual Vending Machine',

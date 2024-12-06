@@ -1,11 +1,12 @@
 import { units } from "./units";
 import { products } from "./products";
 import { upgrades } from "./upgrades"
-
+import { settings } from "./settings"
+import { utilities } from "./utilities"
 export const clickerGame = {
     namespaced: true,
     state: {
-        version: 'V 0.0.4',
+        version: 'V 0.0.5',
         clickCount: 0,
         money: 0,
         moneyRate: 0,
@@ -14,6 +15,7 @@ export const clickerGame = {
         units: units,
         products: products,
         upgrades: upgrades,
+        settings: settings,
         whaleAmnt: 0.1,
         //reqLinesAdjust
         //products sold
@@ -36,22 +38,36 @@ export const clickerGame = {
                 unit.owned++;
             }
         },
-        buyUp(state,{ up, req, targetMod}) {
-            let id = up.id
-        
-            if (up.own >= up.cap){
+        buyUp(state, { up, req, targetMod }) {
+            if (state.settings.debug) {
+                console.log('parameters: ', { state, up, req, targetMod })
+            }
+
+            if (up.own >= up.cap) {
                 return
             }
-            if (state.money >= req){
-                state.money -= req
-                state[up.object][up.id][up.target] = targetMod
-                state.upgrades[id].own += 1;
-                
-                
+
+            if (state.money >= req) {
+                if (up.object === 'state') {
+                    state[up.target] = state[up.target] * targetMod
+                    up.own += 1;
+                    state.money -= req
+                }
+                else if (up.object === 'units') {
+                    let unit = state.units.find((u) => u.id === up.Oid);
+                    unit[up.target] = targetMod
+                    up.own += 1;
+                    state.money -= req
+
+                }
+
+
+
+
             }
         },
         // Sell section
-        sellProd(state, {prodId, req}) {
+        sellProd(state, { prodId, req }) {
             const prod = state.products.find((p) => p.id === prodId)
 
             state.money += prod.baseValue;
@@ -67,55 +83,71 @@ export const clickerGame = {
             state.linesOcode += linesRate;
         },
 
+        //utilities
+
+        saveIntervalUpdate(state, value) {
+            state.settings.saveInterval = value * 1000
+        },
+
 
         // loading section
         // Do not under any circumstance ask me how this works. 
         // I removed a state[key]= from second Object.keys because I was frusterated and somehow everything loaded just fine.
         // I'm currently ripping out my hair over what bs i just witnessed
-        loadState(state, newState) {
-            Object.keys(state).forEach((key) => {
-                let arrState = []
-                let arrNew = []
-                if (Array.isArray(newState[key])){
-                    arrState = state[key]
-                    arrNew = newState[key]
-                    // itter through array object
-                    arrState.map((item, index) =>{
-                        //item object
-                        Object.keys(item).forEach((key) => {
-                            if(arrNew[index][key] !== undefined){
-                                if (key !== "description"){
-                                item[key] = arrNew[index][key]
+        loadState(state, oldState) {
+            // console.log(oldState)
+
+            const Oversion = oldState['version']
+            const Nversion = state['version']
+            if (Oversion !== Nversion) {
+                console.log('Old Save Found! Converting from ', Oversion, ' to ', Nversion)
+                state = utilities.mutations[Oversion.replace(/\s+/g, '').replace(/\./g, '')](state, oldState)
+                const gameState = JSON.stringify(state);
+                localStorage.setItem('clickerGameState', gameState);
+                console.log('Game updated and saved');
+            }
+            else {
+                Object.keys(state).forEach((key) => {
+                    let arrState = []
+                    let arrNew = []
+                    if (Array.isArray(oldState[key])) {
+                        arrState = state[key]
+                        arrNew = oldState[key]
+                        // itter through array object
+                        arrState.map((item, index) => {
+                            //item object
+                            Object.keys(item).forEach((key) => {
+                                if (arrNew[index][key] !== undefined) {
+                                    if (key !== "description") {
+                                        item[key] = arrNew[index][key]
+                                    }
+
                                 }
-                                
-                            }
-                            else{
-                                item[key]=item[key]
-                            }
+                                else {
+                                    item[key] = item[key]
+                                }
+                            })
                         })
-                    })
+                    } else {
+                        state[key] = oldState[key]
 
-                                    
+                    }
+                })
+            }
 
-                }
-                else{
-                    if (newState[key] !== undefined) {
-                        state[key] = newState[key];
-                    }}
-                
-               
-            });
+
         },
         resetState(state) {
             Object.keys(defaultState).forEach((key) => {
                 state[key] = JSON.parse(JSON.stringify(defaultState[key])); // Deep copy to avoid mutation issues
             });
+            window.location.reload() // to fix reset issue
             // console.log(state)
         },
 
 
 
-        
+
 
     },
     getters: {
@@ -137,9 +169,9 @@ export const clickerGame = {
             return prod.cost * rateIncr
 
         },
-        calcUpCost: (state) => (upId) =>{
+        calcUpCost: (state) => (upId) => {
             const upg = state.upgrades.find(u => u.id === upId);
-            if (upg){
+            if (upg) {
                 return upg.costEquation(upg.own, upg.baseCost, upg.cap)
             }
         },
@@ -158,7 +190,7 @@ export const clickerGame = {
             return 'Buy More'
         },
         // needs fixin
-        calcModUpgrade: (state) =>(upId) => {
+        calcModUpgrade: (state) => (upId) => {
             const up = state.upgrades.find(u => u.id === upId);
             if (up) {
                 return up.targetModEquation(up.own)
@@ -172,11 +204,11 @@ export const clickerGame = {
                 commit('sellProd', { prodId, req: require })
             }
         },
-        buyUpgradeAct({getters, commit, state}, up) {
+        buyUpgradeAct({ getters, commit, state }, up) {
             const require = getters.calcUpCost(up.id)
             const targMod = getters.calcModUpgrade(up.id)
-            if (state.money >= require){
-                commit('buyUp',{up, req: require, targetMod: targMod} )
+            if (state.money >= require) {
+                commit('buyUp', { up, req: require, targetMod: targMod })
             }
         },
 
@@ -202,8 +234,10 @@ export const clickerGame = {
         },
 
         resetGame({ commit }) {
-            commit('resetState');
+            // does nothing at the moment
+            // commit('resetState');
             localStorage.removeItem('clickerGameState'); // Clear saved game
+            window.location.reload() // to fix reset issue
             console.log('Game reset');
         },
 
@@ -211,22 +245,22 @@ export const clickerGame = {
 
 
 
-       
+
     }
 
 };
 
 
-const defaultState = () =>({
+const defaultState = () => ({
     version: 'V 0.0.4',
-        clickCount: 0,
-        money: 0,
-        moneyRate: 0,
-        linesOcode: 0,
-        linesRate: 0,
-        units: [...units],
-        products: [...products],
-        upgrades: [...upgrades],
-        whaleAmnt: 0.1,
-        achievements: [],
+    clickCount: 0,
+    money: 0,
+    moneyRate: 0,
+    linesOcode: 0,
+    linesRate: 0,
+    units: [...units],
+    products: [...products],
+    upgrades: [...upgrades],
+    whaleAmnt: 0.1,
+    achievements: [],
 })

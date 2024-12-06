@@ -1,0 +1,174 @@
+[
+
+
+{
+    "version": "V 0.0.4",
+    "clickCount": 129,
+    "money": 134.8999999999999861,
+    "moneyRate": 0,
+    "linesOcode": 12.99999999999999,
+    "linesRate": 0,
+    "units": [
+        {
+            "id": 1,
+            "name": "Student",
+            "baseCost": 10,
+            "productionRate": 0.1,
+            "prodMod": 0.3,
+            "owned": 2,
+            "cap": 3,
+            "available": true
+        },
+        {
+            "id": 2,
+            "name": "Junior Dev",
+            "baseCost": 453,
+            "productionRate": 1,
+            "prodMod": 0.5,
+            "owned": 0,
+            "cap": 10,
+            "available": false
+        },
+        {
+            "id": 3,
+            "name": "Senior Dev",
+            "baseCost": 1008,
+            "productionRate": 10,
+            "prodMod": 0.5,
+            "owned": 0,
+            "cap": 10,
+            "available": false
+        },
+        {
+            "id": 4,
+            "name": "Manager",
+            "baseCost": 1008,
+            "productionRate": 50,
+            "prodMod": 0.5,
+            "owned": 0,
+            "cap": 10,
+            "available": false
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Hello World!",
+            "cost": 3,
+            "baseValue": 5,
+            "mod": 1,
+            "available": true
+        }
+    ],
+    "upgrades": [
+        {
+            "id": "0",
+            "name": "Student Cap",
+            "description": "Does what you think it does",
+            "baseCost": 10,
+            "own": 1,
+            "cap": 10,
+            "object": "units",
+            "target": "cap"
+        }
+    ],
+    "whaleAmnt": 0.1,
+    "achievements": []
+}
+
+,
+
+{
+    "version": "V 0.0.5",
+    "clickCount": 60,
+    "money": 4.0000000000000036,
+    "moneyRate": 0,
+    "linesOcode": 0.8999999999999999,
+    "linesRate": 0,
+    "units": [
+        {
+            "id": 1,
+            "name": "Student",
+            "baseCost": 10,
+            "productionRate": 0.1,
+            "prodMod": 0.3,
+            "owned": 1,
+            "cap": 2,
+            "available": true
+        },
+        {
+            "id": 2,
+            "name": "Junior Dev",
+            "baseCost": 453,
+            "productionRate": 1,
+            "prodMod": 0.5,
+            "owned": 0,
+            "cap": 10,
+            "available": false
+        },
+        {
+            "id": 3,
+            "name": "Senior Dev",
+            "baseCost": 1008,
+            "productionRate": 10,
+            "prodMod": 0.5,
+            "owned": 0,
+            "cap": 10,
+            "available": false
+        },
+        {
+            "id": 4,
+            "name": "Manager",
+            "baseCost": 1008,
+            "productionRate": 50,
+            "prodMod": 0.5,
+            "owned": 0,
+            "cap": 10,
+            "available": false
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Hello World!",
+            "cost": 3,
+            "baseValue": 5,
+            "mod": 1,
+            "available": true
+        }
+    ],
+    "upgrades": [
+        {
+            "id": 1,
+            "name": "Student Cap",
+            "description": "Does what you think it does",
+            "baseCost": 10,
+            "own": 0,
+            "cap": 10,
+            "object": "units",
+            "Oid": 1,
+            "target": "cap"
+        },
+        {
+            "id": 5,
+            "name": "Whale Power",
+            "description": "Increases clicking power",
+            "baseCost": 10,
+            "own": 0,
+            "cap": 10,
+            "object": "state",
+            "target": "whaleAmnt"
+        }
+    ],
+    "settings": {
+        "saveInterval": 60000,
+        "debug": false
+    },
+    "whaleAmnt": 0.1,
+    "achievements": []
+}
+
+
+
+
+]

@@ -1,5 +1,21 @@
 # Version history
 
+<!-- ## V 0.1.0 First big release
+- [ ] Must have Units working and balanced
+- [ ] Must have 5+projects and balanced
+- [ ] Must have Upgrades working
+- [ ] Must have Ui looking nice
+- [ ] must have Saving/Loading/TransferStats working
+- [ ]  -->
+
+## V 0.0.5 12/5/24 Minor Fixes
+- Fixed reset button
+- Added save setting interval
+- Fixed upgrades not upgradin
+- Version compatability for V 0.0.4
+
+
+
 ## V 0.0.4 11/26/24 Saving and Loading
 - Added Saving and loading data (note: does not support importing and exporting yet)
 - Minor mobile support

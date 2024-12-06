@@ -40,11 +40,17 @@
                 <h3>This is the prestige tab</h3>
             </div>
 
-            <div class="settings" v-show="isSettViss" @click.stop>
-                <h3>This is the setting tab</h3>
-                reset does not work yet
-                <button @click="resetGame">Reset Game</button>
-                <!-- add patchnotes -->
+            <div class="settingsTab" v-show="isSettViss" @click.stop>
+                <div class="options">
+                    <div class="saveInterval">
+                        Save Interval<br>
+                        <input type="number" :value="settings.saveInterval / 1000" :min="10" :max="120" :step="1"
+                            @input="saveIntervalUpdate($event.target.value)" @keydown.prevent />
+                    </div>
+                    reset will reload the page
+                    <button @click="resetGame">Reset Game</button>
+                    <!-- add patchnotes -->
+                </div>
             </div>
 
         </div>
@@ -100,7 +106,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations('clickerGame', ['WhaleClick', 'buyUnit',]),
+        ...mapMutations('clickerGame', ['WhaleClick', 'buyUnit', 'saveIntervalUpdate']),
         ...mapActions('clickerGame', ['sellProdAct', 'buyUpgradeAct', 'loadGame', 'saveGame', 'resetGame', 'calc']),
         // getNextCost(unitId) {
         //     return this.calcUnitCost(unitId);
@@ -146,14 +152,22 @@ export default {
         },
 
 
+        setSaveInterval(){
+            clearInterval(this.saveInterval)
+            this.saveInterval = setInterval(() => {
+            this.$store.dispatch('clickerGame/saveGame');
+        }, this.settings.saveInterval)
+        }
+
+
 
     },
-
+    watch: {
+        "settings.saveInterval": "setSaveInterval"
+    },
     mounted() {
         this.gameInterval = setInterval(this.updateGame, 1000);
-        this.saveInterval - setInterval(() => {
-            this.$store.dispatch('clickerGame/saveGame');
-        }, 60000)
+        this.setSaveInterval();
     },
     beforeDestroy() {
         clearInterval(this.gameInterval);
@@ -261,6 +275,18 @@ export default {
     padding: 5px 10px;
     cursor: pointer;
 }
+
+.settingsTab {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 40px;
+    overflow: auto;
+}
+
+
 
 
 

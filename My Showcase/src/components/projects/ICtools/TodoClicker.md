@@ -1,0 +1,11 @@
+## Running list of things to do
+- [ ] add debug console.log parameters to all functions
+- [ ] if bad ask user to save data and contact but for now reset progress
+- [ ] add version support for modifying values maybe calculate them at start
+- [ ] fix calculations for boost/cost/other especially when buying stuff 
+- [ ] make notice when someone uses gameexample product bounus: {cost: num, reward: num}
+- [ ] figure out logic for making units show(prob achivements or something else)
+- [ ] same above for projects and upgrades
+- [ ] fix menu buttons
+- [ ] start ground work for more upgrades/maybe upgrades unlock units/projects
+- [ ] tooltips/tutorial

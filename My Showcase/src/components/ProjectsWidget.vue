@@ -156,11 +156,11 @@ a {
 }
 
 .record-desc {
-    /* Check difference on old stuff.
+    font-size: larger;
       margin: 20px 0 0 10px;
       opacity: 0;
     transition: opacity 400ms ease-in-out 190ms;
-*/
+
     transform: translateY(20px);
     /* Start position */
     opacity: 0;
