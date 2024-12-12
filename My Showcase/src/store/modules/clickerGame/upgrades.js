@@ -97,13 +97,13 @@ export const upgrades = [
         },
         
         targetModEquation: (upOwn) =>{
-            return (upOwn*2)+3
+            return (upOwn*.1)
         },
         baseCost: 10,
         own: 0,
-        cap: 10,
+        cap: 15,
         object: 'state',
-        target: 'whaleAmnt'
+
     },
     // {
     //     id: 6,

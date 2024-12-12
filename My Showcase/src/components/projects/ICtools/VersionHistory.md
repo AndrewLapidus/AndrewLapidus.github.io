@@ -7,6 +7,12 @@
 - [ ] Must have Ui looking nice
 - [ ] must have Saving/Loading/TransferStats working
 - [ ]  -->
+## V 0.0.6 Minor Changes 12/12/24
+- Made changes to how units are unlocked
+- Added second product
+- Made slight rebalancing
+
+
 
 ## V 0.0.5 12/5/24 Minor Fixes
 - Fixed reset button

@@ -23,8 +23,9 @@
 
         <div class="menuTab" v-show="isMenuOpen">
             <button class="close-btn" @click="closeAllMenus">X</button>
-            <div class="upgradeTab">
-                <div class="upgrades" v-for="up in upgrades" :key="up.id" v-show="isUpViss" @click.stop>
+            <div class="upgradeTab" v-for="up in upgrades" :key="up.id" v-show="isUpViss" @click.stop>
+                
+                <div class="upgrades" >
                     <h3>{{ up.name }}</h3>
                     <p>{{ calcUpCost(up.id) }}</p>
                     <button class="buyUpBTN" @click="buyUpgradeAct(up)">Buy</button>
@@ -34,13 +35,16 @@
 
             <div class="achievements" v-show="isAchViss" @click.stop>
                 <h3>This is Achiev tab</h3>
+                Under construction!!!
             </div>
 
             <div class="prestige" v-show="isPristViss" @click.stop>
                 <h3>This is the prestige tab</h3>
+                Under construction!!!
             </div>
 
             <div class="settingsTab" v-show="isSettViss" @click.stop>
+                Under construction!!!
                 <div class="options">
                     <div class="saveInterval">
                         Save Interval<br>
@@ -58,7 +62,7 @@
 
 
         <div class="whale">
-            <button @click="WhaleClick"><img src="/tempWhale.png" /></button>
+            <button @click="whaleClickAct"><img src="/tempWhale.png" /></button>
         </div>
         <div class="unitBar">
             <div class="unit" v-for="unit in unitsAvail" :key="unit.id">
@@ -106,13 +110,13 @@ export default {
         }
     },
     methods: {
-        ...mapMutations('clickerGame', ['WhaleClick', 'buyUnit', 'saveIntervalUpdate']),
-        ...mapActions('clickerGame', ['sellProdAct', 'buyUpgradeAct', 'loadGame', 'saveGame', 'resetGame', 'calc']),
+        ...mapMutations('clickerGame', ['buyUnit', 'saveIntervalUpdate']),
+        ...mapActions('clickerGame', ['sellProdAct', 'buyUpgradeAct', 'loadGame', 'saveGame', 'resetGame', 'whaleClickAct','tick',]),
         // getNextCost(unitId) {
         //     return this.calcUnitCost(unitId);
         // },
         updateGame() {
-            this.$store.commit('clickerGame/produceResources');
+            this.$store.dispatch('clickerGame/tick');
         },
         // Don't be judging I'm having a hard time with these stupid windows
         // Open a specific menu

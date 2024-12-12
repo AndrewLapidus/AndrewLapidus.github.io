@@ -9,10 +9,10 @@ export const units = [
             return Math.floor((1 / 126) * Math.pow(owned - 10, 3) + baseCost)
         },
         productionRate: 0.1,
-        prodMod:0.30,
+        prodMod:0.05,
         owned: 0,
         cap: 2,
-        available: true,
+        
     },
     {
         id: 2,
@@ -24,10 +24,10 @@ export const units = [
             return Math.floor((1 / 126) * Math.pow(owned - 37, 3) + baseCost)
         },
         productionRate: 1.0,
-        prodMod:0.5,
+        prodMod:0.04,
         owned: 0,
         cap: 10,
-        available: false,
+        unlock: {money: 50},
     },
     {
         id: 3,
@@ -39,10 +39,10 @@ export const units = [
             return Math.floor((1 / 126) * Math.pow(owned - 40, 3) + baseCost)
         },
         productionRate: 10.0,
-        prodMod:0.5,
+        prodMod:0.03,
         owned: 0,
         cap: 10,
-        available: false,
+        unlock: {money: 100},
     },
     {
         id: 4,
@@ -54,10 +54,10 @@ export const units = [
             return Math.floor((1 / 126) * Math.pow(owned - 40, 3) + baseCost)
         },
         productionRate: 50.0,
-        prodMod:0.5,
+        prodMod:-0.1,
         owned: 0,
         cap: 10,
-        available: false,
+        unlock: {money: 500},
     },
     
 ];

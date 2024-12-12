@@ -93,6 +93,95 @@ export const utilities = {
             })
             return Cstate
 
+        },
+
+        V005(Cstate, Ostate) {
+            // Take all current keys and match up with your version
+            Object.keys(Cstate).forEach((key) => {
+                if (key==='version'){
+                    Cstate[key] = Cstate[key]
+                }
+                else if (key === 'units') {
+                    const arrState = Cstate[key]
+                    const arrOld = Ostate[key]
+
+                    const oldMap = new Map(arrOld.map(unit => [unit.name, unit]));
+                    const updatedUnits = arrState.map(currentUnit => {
+
+                        if (oldMap.has(currentUnit.name)) {
+                            return {
+                                ...currentUnit,
+                                owned: oldMap.get(currentUnit.name)['owned']
+                            }
+                        }
+                        else {
+                            return {
+                                ...currentUnit,
+                                owned: currentUnit.owned || 0
+                            }
+                        }
+                    })
+                    Cstate[key] = updatedUnits
+
+                }
+                else if (key === 'products') {
+                    //edit later when product changes are made
+
+                    // const arrState = Cstate[key]
+                    // const arrOld = Ostate[key]
+
+                    // const oldMap = new Map(arrOld.map(product => [product.name, product]));
+                    // const updatedProduct = arrState.map(currentProduct => {
+
+                    //     if (oldMap.has(currentProduct.name)){
+                    //         return{
+                    //             ...currentProduct,
+                    //             owned: oldMap.get(currentProduct.name)
+                    //         }
+                    //     }
+                    //     else{
+                    //         return {
+                    //             ...currentProduct,
+                    //             owned: 0
+                    //         }
+                    //     }
+                    // })
+                    // Cstate[key] = updatedProduct
+
+                }
+                else if (key === 'upgrades') {
+                    const arrState = Cstate[key]
+                    const arrOld = Ostate[key]
+
+                    const oldMap = new Map(arrOld.map(up => [up.name, up]));
+                    const updatedUpgrade = arrState.map(currentUpgrade => {
+
+                        if (oldMap.has(currentUpgrade.name)) {
+                            return {
+                                ...currentUpgrade,
+                                own: oldMap.get(currentUpgrade.name)['own']
+                            }
+                        }
+                        else {
+                            return {
+                                ...currentUpgrade,
+                                own: 0
+                            }
+                        }
+                    })
+                    Cstate[key] = updatedUpgrade
+
+                }
+                // settings not yet implemented
+                else if (key === 'settings') {
+                    Cstate[key] = Cstate[key]
+                }
+                else{
+                    Cstate[key] = Ostate[key]
+                }
+            })
+            return Cstate
+
         }
 
 

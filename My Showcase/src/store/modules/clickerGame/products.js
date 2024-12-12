@@ -3,19 +3,21 @@ export const products = [
     {
         id:1,
         name: 'Hello World!',
-        cost: 3,
-        baseValue:5,
+        cost: 2.5,
+        baseValue:2,
         mod: 1,
-        available: true,
+        sold: 0,
+        
     },
-    // {
-    //     id:2,
-    //     name: 'Calculator',
-    //     cost: 30,
-    //     baseValue:10,
-    //     mod: 1,
-    //     available: true,
-    // },
+    {
+        id:2,
+        name: 'Calculator',
+        cost: 30,
+        baseValue:25,
+        mod: 1,
+        sold: 0,
+        unlock: {money: 30},
+    },
     // {
     //     id:3,
     //     name: 'Insert',
