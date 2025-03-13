@@ -84,6 +84,14 @@
                     link: 'IdleClicker',
                     img: 'IdleClicker.png'
                 },
+                {
+                  id:7,
+                  tagline:'Chagrin Valley Roller Rink',
+                  name: 'Website I manage',
+                  description: 'Designed this site using Wordpress, making constant updates according to the needs of the roller rink. Updating calender info, managing Google analytics, and making post for the rink ',
+                  link: 'CVRR',
+                  img: 'cvrr.png'
+                }
 
                 
       ],
@@ -108,14 +116,7 @@
                     link: 'tempp',
                     img: 'Vending.png'
                 },
-                {
-                    id: 7,
-                    tagline: 'Chagrin valley roller rink',
-                    name: 'Website I manage',
-                    description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
-                    link: 'tempp',
-                    img: 'Vending.png'
-                },
+              
                 
                 // {
                 //     id: 6,
