@@ -88,9 +88,25 @@
                   id:7,
                   tagline:'Chagrin Valley Roller Rink',
                   name: 'Website I manage',
-                  description: 'Designed this site using Wordpress, making constant updates according to the needs of the roller rink. Updating calender info, managing Google analytics, and making post for the rink ',
+                  description: 'Designed this site using Wordpress, making constant updates according to the needs of the roller rink. Updating calender info, managing Google analytics, and making post for the rink.',
                   link: 'CVRR',
                   img: 'cvrr.png'
+                },
+                {
+                    id: 8,
+                    tagline: 'Sane Is Grey',
+                    name: 'Christan cartoon',
+                    description: 'Using Squarespace, help manage and design website including keeping it updated.',
+                    link: 'SIG',
+                    img: 'SIG.png'
+                },
+                {
+                  id: 9,
+                  tagline: 'Meditation App',
+                  name: 'Tranquilsea',
+                  description: "Meditation App and site in development with a team of 4. I'm in charge of the entire backend and database including assisting the front end team.",
+                  link: 'tranquilla',
+                  img: 'tranquilla.png'
                 }
 
                 
@@ -108,14 +124,7 @@
                     link: 'tempp',
                     img: 'Vending.png'
                 },
-                {
-                    id: 6,
-                    tagline: 'Shane is sane',
-                    name: 'Christan cartoon',
-                    description: 'Introducing Vendo-Matic 3000, the cutting-edge virtual vending machine CLI application developed for Umbrella Corp. This innovative software allows customers to seamlessly purchase products using their bank accounts directly from their computers, revolutionizing convenience and accessibility.',
-                    link: 'tempp',
-                    img: 'Vending.png'
-                },
+                
               
                 
                 // {

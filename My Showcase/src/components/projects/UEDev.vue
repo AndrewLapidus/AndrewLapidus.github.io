@@ -2,21 +2,35 @@
     <div>
         <h1>This page is under construction!!!</h1>
 <br><br>
-        Doodlejump
+        <h1>Doodlejump</h1>
+        <p>Not much to say about this. Doodle Jump clone using random generation for platform location on the various map templates that are loaded in on passing through the trigger boxes seen on screen. Custom enemies along with a Oculus Quest 2 controller as one of them. Save file and highscores included as well.</p>
         <br><br>
         <img src="/DJGif.gif">
         <br><br>
-        CSAL Project SMIRK
+        <h1>CSAL Project SMIRK</h1>
+        <p>Mobile game currently in develoment with my brother-inlaw.</p>
         <br><br>
         <img src="/testTitle.png" id="test">
         <br><br>
-        LHExp Project
-        <br>
-        This is a horror game in development with a colleege of mine. At this time no updates are available.
+        <h1>LHExp Project</h1>
+        <p>
+        This is a horror game in development with a colleege of mine.  At this time I've only worked on the titlescreen and intro.</p>
+        <video
+      ref="myVideo"
+      width="640"
+      height="360"
+      controls
+    >
+      <source src="/tempIntro.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
         <br><br>
-        Fortnite
+        <h1>Fortnite</h1>
+        <p>
+            With the same team as LHExp we are making maps together. Nothing to showcase at the moment.
+        </p>
         <br><br>
-        There will soon be lots of New content added from my development with the game Fortnite like maps games etc.
+        
         
     </div>
 </template>

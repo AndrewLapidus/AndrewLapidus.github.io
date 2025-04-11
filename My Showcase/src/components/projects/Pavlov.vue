@@ -9,7 +9,7 @@
   <br>
   <img src="/Maze.png">
   <br><br>
-  <h2>Insert project here</h2>
+  <!-- <h2>Insert project here</h2> -->
   <br><br>
   <h2>TG's GunGame</h2>
   This is a custom Gun Game mode with different weapons and  stuff
