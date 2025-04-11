@@ -1,0 +1,1 @@
+import{_ as e,o as s,c as t,a as o}from"./index-BcpG_NQB.js";const a={},c=o("iframe",{id:"frame",src:"https://www.saneisgrey.com/",title:"Sane Is Grey"},null,-1),r=[c];function n(_,i,d,l,p,f){return s(),t("div",null,r)}const u=e(a,[["render",n]]);export{u as default};
