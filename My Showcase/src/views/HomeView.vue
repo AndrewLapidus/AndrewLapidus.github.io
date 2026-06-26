@@ -39,9 +39,9 @@
         {id:0,
           tagline: 'MiniGolf Scorecard & Spinner',
           name: 'MiniGolf Scorecard & Spinner Pro',
-          description: "Ever wanted to keep track of your mini golf scores and add a fun twist to the game? Look no further! Our MiniGolf Scorecard & Spinner Pro is the ultimate companion for mini golf enthusiasts. With this innovative tool, you can easily record your scores, track your progress, and even add an element of excitement with our built-in spinner feature. Whether you're playing with friends or competing in a tournament, this app will enhance your mini golf experience like never before.",
+          description: "Ever wanted to keep track of your mini golf scores and add a fun twist to the game? Look no further! Our MiniGolf Scorecard & Spinner Pro is the ultimate companion for mini golf enthusiasts. With this innovative tool, you can easily record your scores, track your progress, and even add an element of excitement with our built-in spinner feature.",
           link: 'MinigolfSpinner',
-          img: 'Spinner.png'
+          img: 'MSpinner.png'
         },
       {
                     id: 1,
